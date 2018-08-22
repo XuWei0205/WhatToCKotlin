@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="NoBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/ThemeColor</item>
+        <item name="colorPrimaryDark">@color/ThemeColor</item>
+
+    </style>
+
 </resources>
