@@ -1,4 +1,4 @@
-package hanyu.com.whattockotlin.Beans
+package hanyu.com.whattockotlin.beans
 
 /**
  * Created by HanYu on 2018/8/23 0023.

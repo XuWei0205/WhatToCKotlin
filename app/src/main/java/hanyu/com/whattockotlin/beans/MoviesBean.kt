@@ -1,4 +1,4 @@
-package hanyu.com.whattockotlin.Beans
+package hanyu.com.whattockotlin.beans
 
 import com.google.gson.annotations.SerializedName
 
