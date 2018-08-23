@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottomTabHeight">56dp</dimen>
+    <dimen name="bottomTabIconSize">30dp</dimen>
+    <dimen name="bottomTabTextSize">14sp</dimen>
+</resources>

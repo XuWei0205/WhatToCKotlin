@@ -3,7 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="hanyu.com.whattockotlin.activities.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/fl_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/themeColor"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBarLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <com.chaychan.library.BottomBarLayout
+        android:id="@+id/bottomBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottomTabHeight"
+        android:background="@color/themeColor"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.chaychan.library.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="@dimen/bottomTabIconSize"
+            app:iconNormal="@mipmap/ic_tab_dictionary"
+            app:iconSelected="@mipmap/ic_tab_dictionary"
+            app:iconWidth="@dimen/bottomTabIconSize"
+            app:itemText="影集"
+            app:itemTextSize="@dimen/bottomTabTextSize"
+            app:openTouchBg="false"
+            app:textColorNormal="@color/tabTextNormalColor"
+            app:textColorSelected="@color/tabTextSelectedColor" />
+
+        <com.chaychan.library.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="@dimen/bottomTabIconSize"
+            app:iconNormal="@mipmap/ic_tab_home"
+            app:iconSelected="@mipmap/ic_tab_home"
+            app:iconWidth="@dimen/bottomTabIconSize"
+            app:itemText="首页"
+            app:itemTextSize="@dimen/bottomTabTextSize"
+            app:openTouchBg="false"
+            app:textColorNormal="@color/tabTextNormalColor"
+            app:textColorSelected="@color/tabTextSelectedColor" />
+
+        <com.chaychan.library.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:iconHeight="@dimen/bottomTabIconSize"
+            app:iconNormal="@mipmap/ic_tab_mine"
+            app:iconSelected="@mipmap/ic_tab_mine"
+            app:iconWidth="@dimen/bottomTabIconSize"
+            app:itemText="我的"
+            app:itemTextSize="@dimen/bottomTabTextSize"
+            app:openTouchBg="false"
+            app:textColorNormal="@color/tabTextNormalColor"
+            app:textColorSelected="@color/tabTextSelectedColor" />
+
+    </com.chaychan.library.BottomBarLayout>
 
 </android.support.constraint.ConstraintLayout>

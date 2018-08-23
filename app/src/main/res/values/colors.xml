@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ThemeColor">#161616</color>
+    <color name="themeColor">#161616</color>
+    <color name="tabTextSelectedColor">#26A69A</color>
+    <color name="tabTextNormalColor">#666666</color>
+
 </resources>

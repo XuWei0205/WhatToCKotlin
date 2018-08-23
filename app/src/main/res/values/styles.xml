@@ -6,8 +6,8 @@
     </style>
 
     <style name="NoBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/ThemeColor</item>
-        <item name="colorPrimaryDark">@color/ThemeColor</item>
+        <item name="colorPrimary">@color/themeColor</item>
+        <item name="colorPrimaryDark">@color/themeColor</item>
 
     </style>
 
