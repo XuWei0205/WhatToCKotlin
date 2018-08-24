@@ -1,7 +1,7 @@
 package hanyu.com.whattockotlin.beans
 
 /**
- * Created by Administrator on 2018/8/23.
+ * Created by HanYu on 2018/8/23.
  */
 class SubjectBean {
     var subjects: ArrayList<MoviesBean>? = null

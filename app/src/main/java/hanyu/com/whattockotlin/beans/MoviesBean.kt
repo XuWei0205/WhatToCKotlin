@@ -3,7 +3,7 @@ package hanyu.com.whattockotlin.beans
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by Administrator on 2018/8/23.
+ * Created by HanYu on 2018/8/23.
  */
 class MoviesBean {
     var rating: RatingBean? = null
