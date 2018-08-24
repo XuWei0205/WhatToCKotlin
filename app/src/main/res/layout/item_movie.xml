@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item_movie"
+            type="hanyu.com.whattockotlin.beans.MoviesBean" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/itemMovieHeight">
+
+        <ImageView
+            android:layout_width="@dimen/itemMovieCoverWidth"
+            android:layout_height="@dimen/itemMovieCoverHeight" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

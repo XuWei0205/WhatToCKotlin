@@ -3,4 +3,7 @@
     <dimen name="bottomTabHeight">56dp</dimen>
     <dimen name="bottomTabIconSize">30dp</dimen>
     <dimen name="bottomTabTextSize">14sp</dimen>
+    <dimen name="itemMovieHeight">160dp</dimen>
+    <dimen name="itemMovieCoverHeight">140dp</dimen>
+    <dimen name="itemMovieCoverWidth">98dp</dimen>
 </resources>

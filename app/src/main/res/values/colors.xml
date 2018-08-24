@@ -3,5 +3,6 @@
     <color name="themeColor">#161616</color>
     <color name="tabTextSelectedColor">#26A69A</color>
     <color name="tabTextNormalColor">#666666</color>
+    <color name="myBlackPressed">#0b0b0b</color>
 
 </resources>
