@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,10 +12,31 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/itemMovieHeight">
+        android:layout_height="@dimen/itemMovieHeight"
+        android:background="@drawable/bg_item_movie">
 
         <ImageView
+            android:id="@+id/imgv_item_movie_cover"
             android:layout_width="@dimen/itemMovieCoverWidth"
-            android:layout_height="@dimen/itemMovieCoverHeight" />
+            android:layout_height="@dimen/itemMovieCoverHeight"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item_movie.title}"
+            android:textColor="@color/TitleColor"
+            android:textSize="@dimen/titleTextSize"
+            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            tool:text="银翼杀手" />
+
+
     </android.support.constraint.ConstraintLayout>
 </layout>

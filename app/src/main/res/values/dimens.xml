@@ -6,4 +6,5 @@
     <dimen name="itemMovieHeight">160dp</dimen>
     <dimen name="itemMovieCoverHeight">140dp</dimen>
     <dimen name="itemMovieCoverWidth">98dp</dimen>
+    <dimen name="titleTextSize">20sp</dimen>
 </resources>

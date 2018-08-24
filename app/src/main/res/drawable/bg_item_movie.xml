@@ -3,7 +3,7 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="5dp" />
-            <solid android:color="@color/myBlackPressed" />
+            <solid android:color="@color/movieItemPressedColor" />
         </shape>
 
     </item>
