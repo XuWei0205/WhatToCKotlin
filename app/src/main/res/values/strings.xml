@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">看啥片</string>
+    <string name="directors">导演：</string>
+    <string name="cast">主演：</string>
 </resources>

@@ -25,18 +25,79 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_item_movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{item_movie.title}"
             android:textColor="@color/TitleColor"
             android:textSize="@dimen/titleTextSize"
             app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            app:layout_constraintTop_toTopOf="parent"
             tool:text="银翼杀手" />
 
+        <TextView
+            android:id="@+id/tv_item_movie_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item_movie.genres}"
+            android:textSize="@dimen/typeTextSize"
+            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_title" />
 
+        <TextView
+            android:id="@+id/tv_list_item_directors_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/directors"
+            android:textColor="@color/text66"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_type" />
+
+
+        <TextView
+            android:id="@+id/tv_item_movie_directors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/text66"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/tv_list_item_directors_tip"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_type" />
+
+        <TextView
+            android:id="@+id/tv_item_movie_casts_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/cast"
+            android:textColor="@color/text66"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_movie_directors" />
+
+        <TextView
+            android:id="@+id/tv_item_movie_casts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="2dp"
+            android:text="@{item_movie.casts}"
+            android:textColor="@color/text66"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_casts_tip" />
+        
     </android.support.constraint.ConstraintLayout>
 </layout>
