@@ -1,11 +1,17 @@
 package hanyu.com.whattockotlin.beans
 
 import com.google.gson.annotations.SerializedName
+import hanyu.com.whattockotlin.R
+import hanyu.com.whattockotlin.commons.RecycleAdapter
 
 /**
  * Created by HanYu on 2018/8/23.
  */
-class MoviesBean {
+class MoviesBean : RecycleAdapter.IItem {
+    override fun getItemLayout(): Int {
+        return R.layout.item_movie
+    }
+
     var rating: RatingBean? = null
     var genres: ArrayList<String>? = null
     var title: String? = null

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 class RecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     var mData: ArrayList<IItem>? = arrayListOf()
 
-    constructor(VH: RecyclerView.ViewHolder) {
+    constructor() {
 
     }
 
