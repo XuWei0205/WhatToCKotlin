@@ -6,4 +6,5 @@
     <color name="movieItemPressedColor">#0b0b0b</color>
     <color name="TitleColor">#e5e5e5</color>
     <color name="text66">#666666</color>
+    <color name="gold">#FFD700</color>
 </resources>

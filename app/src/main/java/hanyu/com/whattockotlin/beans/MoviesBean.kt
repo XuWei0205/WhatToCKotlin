@@ -20,5 +20,30 @@ class MoviesBean {
     var images: ImageBean? = null
     var art: String = ""
     var id: String = ""
+
+
+    private fun getCastsBean(dataList: ArrayList<CastsBean>): String {
+        val type = StringBuilder()
+        for (tmpType in dataList) {
+            type.append("/").append(tmpType)
+        }
+        return type.toString().substring(1)
+    }
+
+    fun getCasts(): String {
+        return getCastsBean(this.casts!!)
+    }
+
+    fun getDirectors(): String {
+        return getCastsBean(this.directors!!)
+    }
+
+    fun getGenres(): String {
+        val type = StringBuilder()
+        for (tmpType in this.genres!!) {
+            type.append("/").append(tmpType)
+        }
+        return type.toString().substring(1)
+    }
 }
 
