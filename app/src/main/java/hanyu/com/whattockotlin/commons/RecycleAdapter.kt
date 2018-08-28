@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import hanyu.com.whattockotlin.BR
 
+
 /**
  * Created by HanYu on 2018/8/24.
  */
