@@ -13,9 +13,9 @@ import org.greenrobot.eventbus.EventBus
 /**
  * Created by HanYu on 2018/8/23.
  */
-open abstract class BaseFragment<ViewModel : ViewDataBinding> : Fragment() {
+open abstract class BaseFragment : Fragment() {
     private var mEventBus: EventBus? = null
-    lateinit var mViewModel: ViewModel
+
 
 
     @CallSuper
@@ -24,7 +24,7 @@ open abstract class BaseFragment<ViewModel : ViewDataBinding> : Fragment() {
         mEventBus!!.register(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    /*override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = getLayoutView()
         if (view == null) {
             mViewModel = DataBindingUtil.inflate(inflater, getLayoutResource(), null, false)
@@ -33,7 +33,7 @@ open abstract class BaseFragment<ViewModel : ViewDataBinding> : Fragment() {
             mViewModel = DataBindingUtil.bind(view)
         }
         return view
-    }
+    }*/
 
 
     @CallSuper

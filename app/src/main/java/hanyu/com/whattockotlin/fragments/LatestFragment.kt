@@ -1,15 +1,15 @@
 package hanyu.com.whattockotlin.fragments
 
-import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.apis.API
 import hanyu.com.whattockotlin.apis.IAPI
+import hanyu.com.whattockotlin.beans.ListItem
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
-import kotlinx.android.synthetic.main.fragment_latest.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by HanYu on 2018/8/23.
  */
-open class LatestFragment<ViewModel : ViewDataBinding> : BaseFragment<ViewModel>() {
+open class LatestFragment : BaseFragment() {
     private var mListAdapter: RecycleAdapter? = null
 
     override fun getLayoutResource(): Int {
@@ -27,9 +27,9 @@ open class LatestFragment<ViewModel : ViewDataBinding> : BaseFragment<ViewModel>
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        val rootView: View = mViewModel.root
+        var recyclerView = view?.findViewById<RecyclerView>(R.id.rv_main_list)
         mListAdapter = RecycleAdapter()
-        rootView.rv_main_list.adapter = mListAdapter
+        recyclerView!!.adapter = mListAdapter
         getData()
     }
 
@@ -41,16 +41,23 @@ open class LatestFragment<ViewModel : ViewDataBinding> : BaseFragment<ViewModel>
                 .build()
 
         val mIAPI: IAPI = retrofit.create<IAPI>(IAPI::class.java)
-        val call = mIAPI.getLatestMovie(0, 5, "广州")//暂时写死
+        val call = mIAPI.getLatestMovie(0, 10, "广州")//暂时写死
         call.enqueue(object : Callback<SubjectBean> {
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
                 Toast.makeText(activity, "失败$t", Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                requestResponse(response!!)
             }
         })
+
+    }
+
+    fun requestResponse(response: Response<SubjectBean>) {
+        val listItem: ListItem? = null
+        listItem?.setData(response.body().subjects!!)
+        mListAdapter?.setItem(ListItem())
 
 
     }
