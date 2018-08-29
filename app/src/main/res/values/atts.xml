@@ -3,4 +3,9 @@
     <declare-styleable name="RatingBar">
         <attr name="start" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="GlideLoadImageView">
+        <attr name="round" format="float" />
+        <attr name="glideImgvUrl" format="string" />
+    </declare-styleable>
 </resources>

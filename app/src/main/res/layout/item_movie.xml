@@ -15,11 +15,13 @@
         android:layout_height="@dimen/itemMovieHeight"
         android:background="@drawable/bg_item_movie">
 
-        <ImageView
+        <hanyu.com.whattockotlin.widgets.GlideLoadImageView
             android:id="@+id/imgv_item_movie_cover"
             android:layout_width="@dimen/itemMovieCoverWidth"
             android:layout_height="@dimen/itemMovieCoverHeight"
             android:layout_marginStart="10dp"
+            android:scaleType="centerCrop"
+            app:glideImgv="@{item_movie.images.small}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

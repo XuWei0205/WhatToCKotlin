@@ -21,8 +21,8 @@ class RatingBar : LinearLayout {
 
         @BindingAdapter("app:start")
         @JvmStatic
-        fun setStart(RatingBar: RatingBar, start: Int) {
-            RatingBar.setStart(start)
+        fun set(ratingBar: RatingBar, start: Int) {
+            ratingBar.setStart(start)
         }
     }
 

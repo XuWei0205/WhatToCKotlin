@@ -2,6 +2,7 @@ package hanyu.com.whattockotlin.commons
 
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 
@@ -30,7 +31,7 @@ class GlideRoundTransformation : BitmapTransformation {
     }
 
     private fun doTransform(pool: BitmapPool, toTransform: Bitmap): Bitmap {
-
+       // Log.i("glideTest", "doTransform")
         var result: Bitmap? = pool.get(toTransform.width, toTransform.height, Bitmap.Config.ARGB_8888)
         if (result == null) {
             result = Bitmap.createBitmap(toTransform.width, toTransform.height, Bitmap.Config.ARGB_8888)
