@@ -25,6 +25,9 @@ android {
     dataBinding {
         enabled true
     }
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
@@ -46,10 +49,8 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
     compile 'com.android.support:appcompat-v7:27.1.1'//版本 23以上（必须）
-    kapt 'com.android.databinding:compiler:3.2.0-alpha10'
-
+    //kapt 'com.android.databinding:compiler:3.2.0-alpha10'
+    kapt "com.android.databinding:compiler:3.0.0"
 }
 
-kapt {
-    generateStubs = true
-}
+
