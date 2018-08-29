@@ -24,11 +24,11 @@ open class MoviesBean : DataBean() {
 
 
     private fun getCastsBean(dataList: ArrayList<CastsBean>): String {
-        val type = StringBuilder()
-        for (tmpType in dataList) {
-            type.append("/").append(tmpType)
+        val casts = StringBuilder()
+        for (tmpBean in dataList) {
+            casts.append("/").append(tmpBean.name)
         }
-        return type.toString().substring(1)
+        return casts.toString().substring(1)
     }
 
     fun getCasts(): String {

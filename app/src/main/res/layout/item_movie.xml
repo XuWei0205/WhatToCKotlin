@@ -48,6 +48,7 @@
             android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textColor="@color/typeColor"
             android:textSize="@dimen/typeTextSize"
             app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_title" />
@@ -103,15 +104,15 @@
             android:id="@+id/tv_item_movie_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(item_movie.rating.average)}"
             android:textColor="@color/gold"
             android:textSize="18sp"
-            android:text="@{String.valueOf(item_movie.rating.average)}"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/rb_item_movie"
             app:layout_constraintEnd_toEndOf="@id/rb_item_movie"
             app:layout_constraintStart_toStartOf="@id/rb_item_movie"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-            android:textStyle="bold"
             app:layout_constraintVertical_chainStyle="packed"
             tool:text="3.5" />
 
@@ -121,10 +122,10 @@
             android:layout_height="18dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
-            app:start="@{Math.round(item_movie.rating.average/2)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_movie_rate" />
+            app:layout_constraintTop_toBottomOf="@id/tv_item_movie_rate"
+            app:start="@{Math.round(item_movie.rating.average/2)}" />
 
         <View
             android:layout_width="match_parent"

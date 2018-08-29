@@ -7,5 +7,6 @@
     <color name="titleColor">#e5e5e5</color>
     <color name="text66">#666666</color>
     <color name="gold">#FFD700</color>
+    <color name="typeColor">#ff6103</color>
     <color name="lineColor">#333333</color>
 </resources>

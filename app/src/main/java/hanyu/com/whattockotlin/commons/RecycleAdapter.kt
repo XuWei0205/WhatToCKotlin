@@ -16,14 +16,19 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.ItemViewHolder>() {
 
 
     var mData: ArrayList<IItem>? = arrayListOf()
+    var bindListener: IBindData? = null
 
     interface IItem {
         fun getBean(): DataBean
         fun getItemLayout(): Int
     }
 
+    interface IBindData {
+        fun onBind(binding: ViewDataBinding, item: IItem)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder.create(parent, viewType)
+        return ItemViewHolder.create(parent, viewType, bindListener!!)
     }
 
     override fun getItemCount(): Int {
@@ -36,6 +41,10 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.ItemViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return mData?.get(position)!!.getItemLayout()
+    }
+
+    fun setBindDataListener(listener: IBindData) {
+        this@RecycleAdapter.bindListener = listener
     }
 
     fun setItem(item: IItem) {
@@ -75,19 +84,20 @@ class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.ItemViewHolder>() {
         mData?.clear()
     }
 
-    class ItemViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ItemViewHolder(private val binding: ViewDataBinding, private val bindingListener: IBindData) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindTo(item: IItem) {
+            bindingListener.onBind(binding,item)
             binding.setVariable(BR.item_movie, item.getBean())
             binding.executePendingBindings()
         }
 
         companion object {
 
-            fun create(parent: ViewGroup, viewType: Int): ItemViewHolder {
+            fun create(parent: ViewGroup, viewType: Int, bindListener: IBindData): ItemViewHolder {
                 val binding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context),
                         viewType, parent, false)
-                return ItemViewHolder(binding)
+                return ItemViewHolder(binding, bindListener)
             }
         }
     }

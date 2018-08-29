@@ -1,6 +1,7 @@
 package hanyu.com.whattockotlin.fragments
 
 import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -16,6 +17,7 @@ import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
+import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by HanYu on 2018/8/23.
  */
-open class LatestFragment : BaseFragment() {
+open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
+
+
     private var mListAdapter: RecycleAdapter? = null
     private var recyclerView: RecyclerView? = null
 
@@ -54,7 +58,7 @@ open class LatestFragment : BaseFragment() {
                 .build()
 
         val mIAPI: IAPI = retrofit.create<IAPI>(IAPI::class.java)
-        val call = mIAPI.getLatestMovie(0, 10, "广州")//暂时写死
+        val call = mIAPI.getLatestMovie(0, 20, "广州")//暂时写死
         call.enqueue(object : Callback<SubjectBean> {
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
                 Toast.makeText(activity, "失败$t", Toast.LENGTH_SHORT).show()
@@ -77,6 +81,15 @@ open class LatestFragment : BaseFragment() {
             mListAdapter!!.addItem(listItem)
         }
         mListAdapter?.notifyDataSetChanged()
+        mListAdapter?.setBindDataListener(this)
+    }
+
+    override fun onBind(binding: ViewDataBinding, item: RecycleAdapter.IItem) {
+        if (item.getBean() is MoviesBean) {
+            binding.root.tv_item_movie_type.text = (item.getBean() as MoviesBean).getGenres()
+            binding.root.tv_item_movie_casts.text = (item.getBean() as MoviesBean).getCasts()
+            binding.root.tv_item_movie_directors.text = (item.getBean() as MoviesBean).getDirectors()
+        }
 
     }
 
