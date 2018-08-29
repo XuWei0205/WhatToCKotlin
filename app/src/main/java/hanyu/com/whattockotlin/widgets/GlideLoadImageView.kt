@@ -7,6 +7,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import hanyu.com.whattockotlin.commons.GlideRoundTransformation
 
+
 /**
  * Created by HanYu on 2018/8/29.
  */
@@ -44,7 +45,7 @@ class GlideLoadImageView : ImageView {
     fun setGlideImgv(glideImgv: String) {
         Glide.with(mContext)
                 .load(glideImgv)
-                .transform(GlideRoundTransformation(mContext!!, 50f))
+                .transform(GlideRoundTransformation(mContext!!, 5f))
                 .into(this)
 
 

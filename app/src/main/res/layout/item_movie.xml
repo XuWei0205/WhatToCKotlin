@@ -20,7 +20,6 @@
             android:layout_width="@dimen/itemMovieCoverWidth"
             android:layout_height="@dimen/itemMovieCoverHeight"
             android:layout_marginStart="10dp"
-            android:scaleType="centerCrop"
             app:glideImgv="@{item_movie.images.small}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
