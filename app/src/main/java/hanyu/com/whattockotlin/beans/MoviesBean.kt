@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by HanYu on 2018/8/23.
  */
-class MoviesBean {
+open class MoviesBean : DataBean() {
 
     var rating: RatingBean? = null
     var genres: ArrayList<String>? = null

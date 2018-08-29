@@ -1,8 +1,8 @@
 package hanyu.com.whattockotlin.fragments
 
 import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +12,10 @@ import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.apis.API
 import hanyu.com.whattockotlin.apis.IAPI
 import hanyu.com.whattockotlin.beans.ListItem
+import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
+import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 open class LatestFragment : BaseFragment() {
     private var mListAdapter: RecycleAdapter? = null
+    private var recyclerView: RecyclerView? = null
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_latest
@@ -32,15 +35,14 @@ open class LatestFragment : BaseFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val mViewModel: ViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutResource(), null, false)
+        val mViewModel: LatestFragmentDataBinding = DataBindingUtil.inflate(inflater, getLayoutResource(), null, false)
         return mViewModel.root
     }
 
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        var recyclerView = view?.findViewById<RecyclerView>(R.id.rv_main_list)
-        mListAdapter = RecycleAdapter()
-        recyclerView!!.adapter = mListAdapter
+        recyclerView = view?.findViewById(R.id.rv_main_list)
+
         getData()
     }
 
@@ -66,10 +68,15 @@ open class LatestFragment : BaseFragment() {
     }
 
     fun requestResponse(response: Response<SubjectBean>) {
-        val listItem: ListItem? = null
-        listItem?.setData(response.body().subjects!!)
-        mListAdapter?.setItem(ListItem())
-
+        mListAdapter = RecycleAdapter()
+        recyclerView!!.adapter = mListAdapter
+        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        val tepList: ArrayList<MoviesBean> = response.body().subjects!!
+        for (i in tepList.indices) {
+            val listItem = ListItem(tepList[i])
+            mListAdapter!!.addItem(listItem)
+        }
+        mListAdapter?.notifyDataSetChanged()
 
     }
 

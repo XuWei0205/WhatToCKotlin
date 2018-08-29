@@ -14,14 +14,14 @@ import org.greenrobot.eventbus.EventBus
  * Created by HanYu on 2018/8/23.
  */
 open abstract class BaseFragment : Fragment() {
-    private var mEventBus: EventBus? = null
+    //private var mEventBus: EventBus? =  EventBus.getDefault()
 
 
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mEventBus!!.register(this)
+        //mEventBus!!.register(this)
     }
 
     /*override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,7 +39,7 @@ open abstract class BaseFragment : Fragment() {
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
-        mEventBus!!.unregister(this)
+        //mEventBus!!.unregister(this)
     }
 
     open fun getLayoutView(): View? {
