@@ -3,6 +3,7 @@ package hanyu.com.whattockotlin.apis
 import hanyu.com.whattockotlin.beans.SubjectBean
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 /**
@@ -33,4 +34,12 @@ interface IAPI {
 
     @GET("/v2/movie/search")
     fun searchMovieByCastsName(@Query("q") castsName: String, @Query("start") start: Int, @Query("count") count: Int): Call<SubjectBean>
+
+    /**获取电影详情**/
+
+
+    //api.douban.com/v2/movie/subject/1764796
+    @GET("/v2/movie/subject/{movieID}")
+    fun movieDetail(@Part("movieId") movieId: String)
+
 }

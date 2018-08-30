@@ -8,4 +8,7 @@
     <dimen name="itemMovieCoverWidth">98dp</dimen>
     <dimen name="titleTextSize">20sp</dimen>
     <dimen name="typeTextSize">16sp</dimen>
+    <dimen name="app_bar_height">450dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
