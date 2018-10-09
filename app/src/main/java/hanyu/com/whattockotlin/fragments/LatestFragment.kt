@@ -12,7 +12,7 @@ import android.widget.Toast
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.apis.API
 import hanyu.com.whattockotlin.apis.IAPI
-import hanyu.com.whattockotlin.beans.ListItem
+import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
@@ -72,23 +72,18 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
     }
 
     fun requestResponse(response: Response<SubjectBean>) {
-        mListAdapter = RecycleAdapter()
+        val dataList: ArrayList<MoviesBean> = response.body().subjects!!
+        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList)
         recyclerView!!.adapter = mListAdapter
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
-        val tepList: ArrayList<MoviesBean> = response.body().subjects!!
-        for (i in tepList.indices) {
-            val listItem = ListItem(tepList[i])
-            mListAdapter!!.addItem(listItem)
-        }
-        mListAdapter?.notifyDataSetChanged()
         mListAdapter?.setBindDataListener(this)
     }
 
-    override fun onBind(binding: ViewDataBinding, item: RecycleAdapter.IItem) {
-        if (item.getBean() is MoviesBean) {
-            binding.root.tv_item_movie_type.text = (item.getBean() as MoviesBean).getGenres()
-            binding.root.tv_item_movie_casts.text = (item.getBean() as MoviesBean).getCasts()
-            binding.root.tv_item_movie_directors.text = (item.getBean() as MoviesBean).getDirectors()
+    override fun onBind(binding: ViewDataBinding, dataBean: DataBean) {
+        if (dataBean is MoviesBean) {
+            binding.root.tv_item_movie_type.text = dataBean.getGenres()
+            binding.root.tv_item_movie_casts.text = dataBean.getCasts()
+            binding.root.tv_item_movie_directors.text = dataBean.getDirectors()
         }
 
     }
