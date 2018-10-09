@@ -1,19 +1,15 @@
 package hanyu.com.whattockotlin.fragments
 
-import android.app.Fragment
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.CallSuper
-import android.view.LayoutInflater
+import android.support.v4.app.Fragment
 import android.view.View
-import android.view.ViewGroup
-import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by HanYu on 2018/8/23.
  */
 open abstract class BaseFragment : Fragment() {
+    var name = toString()
     //private var mEventBus: EventBus? =  EventBus.getDefault()
 
 

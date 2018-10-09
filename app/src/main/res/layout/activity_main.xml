@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/themeColor"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBarLayout"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_barLayout"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
     <com.chaychan.library.BottomBarLayout
-        android:id="@+id/bottomBarLayout"
+        android:id="@+id/bottom_barLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottomTabHeight"
         android:background="@color/themeColor"
@@ -45,7 +45,7 @@
             app:iconNormal="@mipmap/ic_tab_home_normal"
             app:iconSelected="@mipmap/ic_tab_home_selected"
             app:iconWidth="@dimen/bottomTabIconSize"
-            app:itemText="首页"
+            app:itemText="最近"
             app:itemTextSize="@dimen/bottomTabTextSize"
             app:openTouchBg="false"
             app:textColorNormal="@color/tabTextNormalColor"

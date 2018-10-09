@@ -37,16 +37,14 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
         return R.layout.fragment_latest
     }
 
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val mViewModel: LatestFragmentDataBinding = DataBindingUtil.inflate(inflater, getLayoutResource(), null, false)
         return mViewModel.root
     }
 
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = view?.findViewById(R.id.rv_main_list)
-
         getData()
     }
 
