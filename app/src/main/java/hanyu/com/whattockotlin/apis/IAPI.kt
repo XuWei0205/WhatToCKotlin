@@ -1,5 +1,6 @@
 package hanyu.com.whattockotlin.apis
 
+import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import retrofit2.Call
 import retrofit2.http.GET
@@ -40,6 +41,6 @@ interface IAPI {
 
     //api.douban.com/v2/movie/subject/1764796
     @GET("/v2/movie/subject/{movieID}")
-    fun movieDetail(@Part("movieId") movieId: String)
+    fun movieDetail(@Part("movieId") movieId: String):Call<MoviesBean>
 
 }
