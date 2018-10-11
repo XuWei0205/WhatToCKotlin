@@ -48,10 +48,12 @@ class MovieDetailActivity : BaseActivity() {
 
         val mIAPI: IAPI = retrofit.create<IAPI>(IAPI::class.java)
         val call = mIAPI.movieDetail(movieId)//暂时写死
+        Log.i("timeTimeCurrent1", System.currentTimeMillis().toString())
         call.enqueue(object : Callback<MoviesBean> {
             override fun onResponse(call: Call<MoviesBean>?, response: Response<MoviesBean>?) {
                 if (response != null) {
                     requestResponse(response)
+                    Log.i("timeTimeCurrent2", System.currentTimeMillis().toString())
                     Log.i("response", response.toString())
                 }
             }
@@ -65,6 +67,7 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     private fun requestResponse(response: Response<MoviesBean>) {
+        Log.i("timeTimeCurrent3", System.currentTimeMillis().toString())
         ImageLoder.loadImage(this@MovieDetailActivity, imgv_detail_cover, response.body().images?.large!!)
 
     }

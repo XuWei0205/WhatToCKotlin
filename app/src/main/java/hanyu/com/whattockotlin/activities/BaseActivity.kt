@@ -1,5 +1,6 @@
 package hanyu.com.whattockotlin.activities
 
+import android.support.annotation.CallSuper
 import android.support.v7.app.AppCompatActivity
 import hanyu.com.whattockotlin.fragments.BaseFragment
 
@@ -8,7 +9,7 @@ import hanyu.com.whattockotlin.fragments.BaseFragment
  */
 open class BaseActivity : AppCompatActivity(){
 
-    fun addFragment(containerResourceId: Int, fc: Class<out BaseFragment>, tag: String) {
+    fun addFragment(containerResourceId: Int, fc: Class<out BaseFragment>, tag: String): BaseFragment? {
         val fragmentManager = supportFragmentManager
 
         var fragment: BaseFragment? = if (fragmentManager.findFragmentByTag(tag) != null) {
@@ -28,7 +29,9 @@ open class BaseActivity : AppCompatActivity(){
             fragmentTransaction.add(containerResourceId, fragment, tag)
         }
         fragmentTransaction.commitAllowingStateLoss()
+        return fragment
 
     }
+
 
 }

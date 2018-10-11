@@ -3,9 +3,7 @@ package hanyu.com.whattockotlin.apis
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Part
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Created by HanYu  on 2018/8/23.
@@ -41,6 +39,6 @@ interface IAPI {
 
     //api.douban.com/v2/movie/subject/1764796
     @GET("/v2/movie/subject/{movieID}")
-    fun movieDetail(@Part("movieId") movieId: String):Call<MoviesBean>
+    fun movieDetail(@Path("movieID") movieId: String):Call<MoviesBean>
 
 }
