@@ -81,6 +81,7 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
         recyclerView!!.adapter = mListAdapter
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
         mListAdapter?.setBindDataListener(this)
+        mListAdapter?.openLoadAnimation()
 
     }
 
