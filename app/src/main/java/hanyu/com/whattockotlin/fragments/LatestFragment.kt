@@ -32,8 +32,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
 
 
-    private var mListAdapter: RecycleAdapter? = null
-    private var recyclerView: RecyclerView? = null
+    private lateinit var mListAdapter: RecycleAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_latest
@@ -74,14 +74,14 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
     fun requestResponse(response: Response<SubjectBean>) {
         val dataList: ArrayList<MoviesBean> = response.body().subjects!!
         mListAdapter = RecycleAdapter(R.layout.item_movie, dataList)
-        mListAdapter!!.setOnItemClickListener { _, _, position ->
+        mListAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
             startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))
         }
-        recyclerView!!.adapter = mListAdapter
-        recyclerView!!.layoutManager = LinearLayoutManager(activity)
-        mListAdapter?.setBindDataListener(this)
-        mListAdapter?.openLoadAnimation()
+        recyclerView.adapter = mListAdapter
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        mListAdapter.setBindDataListener(this)
+        mListAdapter.openLoadAnimation()
 
     }
 
