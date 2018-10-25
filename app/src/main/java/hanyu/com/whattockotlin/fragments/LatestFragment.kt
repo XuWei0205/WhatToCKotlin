@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.activities.MovieDetailActivity
 import hanyu.com.whattockotlin.apis.API
@@ -73,14 +74,13 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
 
     fun requestResponse(response: Response<SubjectBean>) {
         val dataList: ArrayList<MoviesBean> = response.body().subjects!!
-        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList)
+        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList,this, BR.item_movie)
         mListAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
             startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))
         }
         recyclerView.adapter = mListAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        mListAdapter.setBindDataListener(this)
         mListAdapter.openLoadAnimation()
 
     }
