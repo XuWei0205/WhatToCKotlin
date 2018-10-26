@@ -9,11 +9,8 @@ import hanyu.com.whattockotlin.fragments.BaseFragment
  * Created by HanYu on 2018/10/26.
  */
 object RouterManager {
-    fun BaseFragment.jumpTo(url: String): Postcard {
-        return ARouter.getInstance().build(url)
-    }
 
-    fun BaseActivity.jumpTo(url: String): Postcard {
-        return ARouter.getInstance().build(url)
-    }
+    fun BaseFragment.jumpTo(url: String): Postcard = ARouter.getInstance().build(url)
+
+    fun BaseActivity.jumpTo(url: String): Postcard = ARouter.getInstance().build(url)
 }
