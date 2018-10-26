@@ -13,8 +13,8 @@ import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.activities.MovieDetailActivity
-import hanyu.com.whattockotlin.apis.API
-import hanyu.com.whattockotlin.apis.IAPI
+import hanyu.com.whattockotlin.network.apis.API
+import hanyu.com.whattockotlin.network.apis.IAPI
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean

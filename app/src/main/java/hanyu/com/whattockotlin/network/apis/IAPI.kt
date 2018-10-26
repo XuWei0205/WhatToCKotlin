@@ -1,4 +1,4 @@
-package hanyu.com.whattockotlin.apis
+package hanyu.com.whattockotlin.network.apis
 
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean

@@ -8,8 +8,8 @@ import android.util.Log
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
-import hanyu.com.whattockotlin.apis.API
-import hanyu.com.whattockotlin.apis.IAPI
+import hanyu.com.whattockotlin.network.apis.API
+import hanyu.com.whattockotlin.network.apis.IAPI
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.loadImage

@@ -15,7 +15,7 @@ fun ImageView.loadImage(context: Context, imageUrl: String) {
 
 /**加载圆角图片四角相同
  * @param roundValue 圆角值 单位dp**/
-fun ImageView.loadRoudImage(context: Context, imageUrl: String, roundValue: Float) {
+fun ImageView.loadRoundImage(context: Context, imageUrl: String, roundValue: Float) {
     Glide.with(context)
             .load(imageUrl)
             .transform(GlideRoundTransformation(context, roundValue))

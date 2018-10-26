@@ -4,7 +4,7 @@ import android.content.Context
 import android.databinding.BindingAdapter
 import android.util.AttributeSet
 import android.widget.ImageView
-import hanyu.com.whattockotlin.commons.loadRoudImage
+import hanyu.com.whattockotlin.commons.loadRoundImage
 
 
 /**
@@ -42,6 +42,6 @@ class GlideLoadImageView : ImageView {
 
 
     fun setGlideImgv(glideImgv: String) {
-        loadRoudImage(mContext, glideImgv, 5f)
+        loadRoundImage(mContext, glideImgv, 5f)
     }
 }
