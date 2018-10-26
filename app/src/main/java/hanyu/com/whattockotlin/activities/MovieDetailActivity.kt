@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.apis.API
 import hanyu.com.whattockotlin.apis.IAPI
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.commons.ImageLoder
+import hanyu.com.whattockotlin.commons.Router
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by HanYu on 2018/8/30.
  */
+@Route(path = Router.MOVIE_DETAIL)
 class MovieDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

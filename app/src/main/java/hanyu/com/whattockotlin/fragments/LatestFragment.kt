@@ -1,6 +1,5 @@
 package hanyu.com.whattockotlin.fragments
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -12,13 +11,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
-import hanyu.com.whattockotlin.activities.MovieDetailActivity
 import hanyu.com.whattockotlin.apis.API
 import hanyu.com.whattockotlin.apis.IAPI
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
+import hanyu.com.whattockotlin.commons.Router
+import hanyu.com.whattockotlin.commons.RouterManager.jumpTo
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call
@@ -76,8 +76,7 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
         val dataList: ArrayList<MoviesBean> = response.body().subjects!!
         mListAdapter = RecycleAdapter(R.layout.item_movie, dataList,this, BR.item_movie)
         mListAdapter.setOnItemClickListener { _, _, position ->
-            Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
-            startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))
+            jumpTo(Router.MOVIE_DETAIL).withString("movieId", dataList[position].id).navigation()
         }
         recyclerView.adapter = mListAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
