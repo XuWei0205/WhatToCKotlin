@@ -5,7 +5,7 @@ import android.content.Context
 /**
  * Created by HanYu on 2018/10/24.
  */
-object DisplayUtil {
+
     /**dp转px
      * @param dpValue dp值**/
     fun dpToPx(context: Context, dpValue: Float): Int {
@@ -16,4 +16,3 @@ object DisplayUtil {
     fun getDensity(context: Context): Float {
         return context.resources.displayMetrics.density
     }
-}

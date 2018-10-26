@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import hanyu.com.whattockotlin.R
-import hanyu.com.whattockotlin.commons.DisplayUtil
+import hanyu.com.whattockotlin.commons.dpToPx
 
 
 /**
@@ -44,7 +44,7 @@ class RatingBar : LinearLayout {
 
     private fun initRatingView(context: Context) {
         val params: LinearLayout.LayoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        val viewSize: Int = DisplayUtil.dpToPx(context, 2f)
+        val viewSize: Int = dpToPx(context, 2f)
         params.setMargins(viewSize, viewSize, viewSize, viewSize)
         params.weight = 1f
         for (i in 0..4) {

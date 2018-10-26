@@ -1,10 +1,8 @@
 package hanyu.com.whattockotlin.commons
 
 /**
- * Created by HanYu on 2018/8/27.
+ * Created by HanYu on 2018/10/26.
  */
-interface Debug {
-    companion object {
-        const val DEVELOP_MODE: Boolean = true
-    }
+object Debug {
+    const val DEVELOP_MODE: Boolean = true
 }

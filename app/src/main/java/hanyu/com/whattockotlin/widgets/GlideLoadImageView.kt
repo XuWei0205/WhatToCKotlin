@@ -4,15 +4,14 @@ import android.content.Context
 import android.databinding.BindingAdapter
 import android.util.AttributeSet
 import android.widget.ImageView
-import com.bumptech.glide.Glide
-import hanyu.com.whattockotlin.commons.GlideRoundTransformation
+import hanyu.com.whattockotlin.commons.loadRoudImage
 
 
 /**
  * Created by HanYu on 2018/8/29.
  */
 class GlideLoadImageView : ImageView {
-    private var mContext: Context? = null
+    private lateinit var mContext: Context
 
     companion object {
         @BindingAdapter("app:glideImgv")
@@ -24,7 +23,7 @@ class GlideLoadImageView : ImageView {
     }
 
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         mContext = context
     }
 
@@ -43,11 +42,6 @@ class GlideLoadImageView : ImageView {
 
 
     fun setGlideImgv(glideImgv: String) {
-        Glide.with(mContext)
-                .load(glideImgv)
-                .transform(GlideRoundTransformation(mContext!!, 5f))
-                .into(this)
-
-
+        loadRoudImage(mContext, glideImgv, 5f)
     }
 }

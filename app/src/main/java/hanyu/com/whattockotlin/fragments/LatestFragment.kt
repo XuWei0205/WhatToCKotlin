@@ -18,7 +18,7 @@ import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
 import hanyu.com.whattockotlin.commons.Router
-import hanyu.com.whattockotlin.commons.RouterManager.jumpTo
+import hanyu.com.whattockotlin.commons.jumpTo
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call

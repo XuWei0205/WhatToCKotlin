@@ -11,8 +11,8 @@ import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.apis.API
 import hanyu.com.whattockotlin.apis.IAPI
 import hanyu.com.whattockotlin.beans.MoviesBean
-import hanyu.com.whattockotlin.commons.ImageLoder
 import hanyu.com.whattockotlin.commons.Router
+import hanyu.com.whattockotlin.commons.loadImage
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -71,7 +71,7 @@ class MovieDetailActivity : BaseActivity() {
 
     private fun requestResponse(response: Response<MoviesBean>) {
         Log.i("timeTimeCurrent3", System.currentTimeMillis().toString())
-        ImageLoder.loadImage(this@MovieDetailActivity, imgv_detail_cover, response.body().images?.large!!)
+        imgv_detail_cover.loadImage(this@MovieDetailActivity, response.body().images?.large!!)
 
     }
 
