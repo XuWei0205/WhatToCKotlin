@@ -6,11 +6,11 @@ import android.util.Log
 /**
  * Created by HanYu on 2018/8/27.
  */
-class SuperLog {
-    private val LOG_FORMAT = "%1\$s\n%2\$s"
-    private val LOG_TAG = "CommonApp"
+object SuperLog {
+    private const val LOG_FORMAT = "%1\$s\n%2\$s"
+    private const val LOG_TAG = "WTCKotlin"
 
-    fun d(message: String) {
+    fun LogD(message: String) {
         if (TextUtils.isEmpty(message)) {
             return
         }
@@ -22,7 +22,7 @@ class SuperLog {
         }
     }
 
-    fun d(vararg args: Any) {
+    fun LogD(vararg args: Any) {
 
         if (Debug.DEVELOP_MODE) {
             val stack = Throwable().stackTrace
@@ -38,7 +38,7 @@ class SuperLog {
         }
     }
 
-    fun i(message: String) {
+    fun LogI(message: String) {
         if (TextUtils.isEmpty(message)) {
             return
         }
@@ -50,7 +50,7 @@ class SuperLog {
         }
     }
 
-    fun i(vararg args: Any) {
+    fun LogI(vararg args: Any) {
         if (Debug.DEVELOP_MODE) {
             val stack = Throwable().stackTrace
             val i = 1
@@ -65,7 +65,7 @@ class SuperLog {
         }
     }
 
-    fun w(message: String) {
+    fun LogW(message: String) {
         if (TextUtils.isEmpty(message)) {
             return
         }
@@ -77,7 +77,7 @@ class SuperLog {
         }
     }
 
-    fun w(vararg args: Any) {
+    fun LogW(vararg args: Any) {
         if (Debug.DEVELOP_MODE) {
             val stack = Throwable().stackTrace
             val i = 1
@@ -92,7 +92,7 @@ class SuperLog {
         }
     }
 
-    fun e(message: String) {
+    fun LogE(message: String) {
         if (TextUtils.isEmpty(message)) {
             return
         }
@@ -104,7 +104,7 @@ class SuperLog {
         }
     }
 
-    fun e(vararg args: Any) {
+    fun LogE(vararg args: Any) {
         if (Debug.DEVELOP_MODE) {
             val stack = Throwable().stackTrace
             val i = 1
@@ -119,7 +119,7 @@ class SuperLog {
         }
     }
 
-    fun e(ex: Throwable?) {
+    fun LogE(ex: Throwable?) {
         if (ex == null) {
             return
         }
@@ -134,7 +134,7 @@ class SuperLog {
         }
     }
 
-    fun e(ex: Throwable?, vararg args: Any) {
+    fun LogE(ex: Throwable?, vararg args: Any) {
         if (Debug.DEVELOP_MODE) {
             val stack = Throwable().stackTrace
             val i = 1

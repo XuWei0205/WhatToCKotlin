@@ -13,19 +13,16 @@ import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.activities.MovieDetailActivity
-import hanyu.com.whattockotlin.network.apis.API
-import hanyu.com.whattockotlin.network.apis.IAPI
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.RecycleAdapter
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
+import hanyu.com.whattockotlin.network.NetworkManager
 import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by HanYu on 2018/8/23.
@@ -51,21 +48,13 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
     }
 
     private fun getData() {
-        //todo 网络请求优化
-        val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(API.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        val mIAPI: IAPI = retrofit.create<IAPI>(IAPI::class.java)
-        val call = mIAPI.getLatestMovie(0, 20, "广州")//暂时写死
-        call.enqueue(object : Callback<SubjectBean> {
+        val params = mapOf("start" to 0, "count" to 20, "city" to "北京")
+        NetworkManager.request(NetworkManager.getIAPIByGson().getLatestMovie(params = params), object : Callback<SubjectBean> {
+            override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
+                requestResponse(response)
+            }
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
                 Toast.makeText(activity, "失败$t", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>?) {
-                requestResponse(response!!)
             }
         })
 

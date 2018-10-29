@@ -3,7 +3,10 @@ package hanyu.com.whattockotlin.network.apis
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 /**
  * Created by HanYu  on 2018/8/23.
@@ -19,6 +22,10 @@ interface IAPI {
 
     @GET("/v2/movie/in_theaters")
     fun getLatestMovie(@Query("start") start: Int, @Query("count") count: Int, @Query("city") city: String): Call<SubjectBean>
+
+    @JvmSuppressWildcards
+    @GET("/v2/movie/in_theaters")
+    fun getLatestMovie(@QueryMap params: Map<String, Any>): Call<SubjectBean>
 
 
     /**根据电影类型获取电影列表
