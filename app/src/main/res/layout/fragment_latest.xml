@@ -7,29 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/themeColor">
 
-    <!--<FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_main_banner"
-            android:layout_width="200dp"
-            android:layout_height="285dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/themeColor"
-            android:clipChildren="false">
-
-        </android.support.v4.view.ViewPager>
-    </FrameLayout>-->
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_main_list"
+        android:id="@+id/rvMainList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/themeColor">

@@ -20,8 +20,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initView() {
-        bottom_barLayout.currentItem = 1
-        bottom_barLayout.setOnItemSelectedListener { bottomBarItem: BottomBarItem, oldPosition: Int, newposition: Int ->
+        bottomBarLayout.currentItem = 1
+        bottomBarLayout.setOnItemSelectedListener { bottomBarItem: BottomBarItem, oldPosition: Int, newposition: Int ->
             val f = jumpToFragment(newposition)!!.show()
             fragments.filter { it != f }.forEach { it?.hide() }
             currentFragment = f
@@ -32,10 +32,10 @@ class MainActivity : BaseActivity() {
     private fun jumpToFragment(position: Int): BaseFragment? {
         val fragment = fragments[position] ?: when (position) {
         //0 ->
-            1 -> addFragment(R.id.fl_main_content, LatestFragment::class.java, "最近")
-            0 -> addFragment(R.id.fl_main_content, LatestFragment2::class.java, "test")
-            2 -> addFragment(R.id.fl_main_content, LatestFragment2::class.java, "test")
-            else -> addFragment(R.id.fl_main_content, LatestFragment::class.java, "最近")
+            1 -> addFragment(R.id.flMainContent, LatestFragment::class.java, "最近")
+            0 -> addFragment(R.id.flMainContent, LatestFragment2::class.java, "test")
+            2 -> addFragment(R.id.flMainContent, LatestFragment2::class.java, "test")
+            else -> addFragment(R.id.flMainContent, LatestFragment::class.java, "最近")
         }
         fragments[position] = fragment
         return fragment

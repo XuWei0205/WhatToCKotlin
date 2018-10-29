@@ -16,7 +16,7 @@
         android:background="@drawable/bg_item_movie">
 
         <hanyu.com.whattockotlin.widgets.GlideLoadImageView
-            android:id="@+id/imgv_item_movie_cover"
+            android:id="@+id/imgvItemMovieCover"
             android:layout_width="@dimen/itemMovieCoverWidth"
             android:layout_height="@dimen/itemMovieCoverHeight"
             android:layout_marginStart="10dp"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_item_movie_title"
+            android:id="@+id/tvItemMovieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -36,12 +36,12 @@
             android:text="@{item_movie.title}"
             android:textColor="@color/titleColor"
             android:textSize="@dimen/titleTextSize"
-            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
+            app:layout_constraintStart_toEndOf="@id/imgvItemMovieCover"
             app:layout_constraintTop_toTopOf="parent"
             tool:text="银翼杀手" />
 
         <TextView
-            android:id="@+id/tv_item_movie_type"
+            android:id="@+id/tvItemMovieType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -51,11 +51,11 @@
             tool:text="科幻/剧情"
             android:textColor="@color/typeColor"
             android:textSize="@dimen/typeTextSize"
-            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_title" />
+            app:layout_constraintStart_toEndOf="@id/imgvItemMovieCover"
+            app:layout_constraintTop_toBottomOf="@+id/tvItemMovieTitle" />
 
         <TextView
-            android:id="@+id/tv_list_item_directors_tip"
+            android:id="@+id/tvListItemDirectorsTip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -63,12 +63,12 @@
             android:text="@string/directors"
             android:textColor="@color/text66"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_type" />
+            app:layout_constraintStart_toEndOf="@id/imgvItemMovieCover"
+            app:layout_constraintTop_toBottomOf="@+id/tvItemMovieType" />
 
 
         <TextView
-            android:id="@+id/tv_item_movie_directors"
+            android:id="@+id/tvItemMovieDirectors"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -76,14 +76,14 @@
             android:textSize="12sp"
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_list_item_directors_tip"
-            app:layout_constraintEnd_toStartOf="@id/gl_one"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvListItemDirectorsTip"
+            app:layout_constraintEnd_toStartOf="@id/glOne"
             tool:text="雷德利·斯科特"
-            app:layout_constraintStart_toEndOf="@id/tv_list_item_directors_tip"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_type" />
+            app:layout_constraintStart_toEndOf="@id/tvListItemDirectorsTip"
+            app:layout_constraintTop_toBottomOf="@+id/tvItemMovieType" />
 
         <TextView
-            android:id="@+id/tv_item_movie_casts_tip"
+            android:id="@+id/tvItemMovieCastsTip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
@@ -91,11 +91,11 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/text66"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_movie_directors" />
+            app:layout_constraintStart_toEndOf="@id/imgvItemMovieCover"
+            app:layout_constraintTop_toBottomOf="@id/tvItemMovieDirectors" />
 
         <TextView
-            android:id="@+id/tv_item_movie_casts"
+            android:id="@+id/tvItemMovieCasts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="18dp"
@@ -106,37 +106,37 @@
             android:ellipsize="end"
             android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgv_item_movie_cover"
-            app:layout_constraintEnd_toStartOf="@id/gl_one"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_casts_tip"
+            app:layout_constraintStart_toEndOf="@id/imgvItemMovieCover"
+            app:layout_constraintEnd_toStartOf="@id/glOne"
+            app:layout_constraintTop_toBottomOf="@+id/tvItemMovieCastsTip"
             tool:text="哈里森·福特 " />
 
 
         <TextView
-            android:id="@+id/tv_item_movie_rate"
+            android:id="@+id/tvItemMovieRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(item_movie.rating.average)}"
             android:textColor="@color/gold"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/rb_item_movie"
-            app:layout_constraintEnd_toEndOf="@id/rb_item_movie"
-            app:layout_constraintStart_toStartOf="@id/rb_item_movie"
+            app:layout_constraintBottom_toTopOf="@id/rbItemMovie"
+            app:layout_constraintEnd_toEndOf="@id/rbItemMovie"
+            app:layout_constraintStart_toStartOf="@id/rbItemMovie"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintVertical_chainStyle="packed"
             tool:text="9.0" />
 
         <hanyu.com.whattockotlin.widgets.RatingBar
-            android:id="@+id/rb_item_movie"
+            android:id="@+id/rbItemMovie"
             android:layout_width="90dp"
             android:layout_height="18dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_movie_rate"
+            app:layout_constraintTop_toBottomOf="@id/tvItemMovieRate"
             app:start="@{Math.round(item_movie.rating.average/2)}" />
 
         <View
@@ -148,7 +148,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/gl_one"
+            android:id="@+id/glOne"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"

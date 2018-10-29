@@ -46,7 +46,7 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = view.findViewById(R.id.rv_main_list)
+        recyclerView = view.findViewById(R.id.rvMainList)
         getData()
     }
 
@@ -85,9 +85,9 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
     override fun onBind(binding: ViewDataBinding, dataBean: DataBean) {
         if (dataBean is MoviesBean) {
-            binding.root.tv_item_movie_type.text = dataBean.getGenres()
-            binding.root.tv_item_movie_casts.text = dataBean.getCasts()
-            binding.root.tv_item_movie_directors.text = dataBean.getDirectors()
+            binding.root.tvItemMovieType.text = dataBean.getGenres()
+            binding.root.tvItemMovieCasts.text = dataBean.getCasts()
+            binding.root.tvItemMovieDirectors.text = dataBean.getDirectors()
         }
 
     }

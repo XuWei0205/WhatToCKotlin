@@ -11,9 +11,9 @@ import hanyu.com.whattockotlin.beans.MoviesBean
 class HomeAdapter(layoutResId: Int, data: List<MoviesBean>) : BaseQuickAdapter<MoviesBean, BaseViewHolder>(layoutResId, data) {
 
     override fun convert(helper: BaseViewHolder, item: MoviesBean) {
-        helper.setText(R.id.tv_item_movie_type,item.getGenres())
-        helper.setText(R.id.tv_item_movie_casts,item.getCasts())
-        helper.setText(R.id.tv_item_movie_directors,item.getDirectors())
+        helper.setText(R.id.tvItemMovieType,item.getGenres())
+        helper.setText(R.id.tvItemMovieCasts,item.getCasts())
+        helper.setText(R.id.tvItemMovieDirectors,item.getDirectors())
 
     }
 }

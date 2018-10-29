@@ -71,7 +71,7 @@ class MovieDetailActivity : BaseActivity() {
 
     private fun requestResponse(response: Response<MoviesBean>) {
         Log.i("timeTimeCurrent3", System.currentTimeMillis().toString())
-        imgv_detail_cover.loadImage(this@MovieDetailActivity, response.body().images?.large!!)
+        imgvDetailCover.loadImage(this@MovieDetailActivity, response.body().images?.large!!)
 
     }
 

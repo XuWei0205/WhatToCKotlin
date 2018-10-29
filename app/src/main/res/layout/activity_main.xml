@@ -7,17 +7,17 @@
     tools:context="hanyu.com.whattockotlin.activities.MainActivity">
 
     <FrameLayout
-        android:id="@+id/fl_main_content"
+        android:id="@+id/flMainContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/themeColor"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_barLayout"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBarLayout"
         app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
     <com.chaychan.library.BottomBarLayout
-        android:id="@+id/bottom_barLayout"
+        android:id="@+id/bottomBarLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottomTabHeight"
         android:background="@color/themeColor"
@@ -68,7 +68,7 @@
     </com.chaychan.library.BottomBarLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fb_test"
+        android:id="@+id/fbTest"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:visibility="gone"/>
