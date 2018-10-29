@@ -8,17 +8,15 @@ import android.util.Log
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
-import hanyu.com.whattockotlin.network.apis.API
-import hanyu.com.whattockotlin.network.apis.IAPI
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.loadImage
+import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
+import hanyu.com.whattockotlin.network.NetworkManager.request
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by HanYu on 2018/8/30.
@@ -43,36 +41,18 @@ class MovieDetailActivity : BaseActivity() {
         if (TextUtils.isEmpty(movieId)) {
             return
         }
-
-        val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(API.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        val mIAPI: IAPI = retrofit.create<IAPI>(IAPI::class.java)
-        val call = mIAPI.movieDetail(movieId)//暂时写死
-        Log.i("timeTimeCurrent1", System.currentTimeMillis().toString())
-        call.enqueue(object : Callback<MoviesBean> {
-            override fun onResponse(call: Call<MoviesBean>?, response: Response<MoviesBean>?) {
-                if (response != null) {
-                    requestResponse(response)
-                    Log.i("timeTimeCurrent2", System.currentTimeMillis().toString())
-                    Log.i("response", response.toString())
-                }
-            }
-
+        request(getIAPIByGson().movieDetail(movieId), object : Callback<MoviesBean> {
             override fun onFailure(call: Call<MoviesBean>?, t: Throwable?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
-
+            override fun onResponse(call: Call<MoviesBean>?, response: Response<MoviesBean>) {
+                requestResponse(response)
+            }
         })
-
     }
 
     private fun requestResponse(response: Response<MoviesBean>) {
-        Log.i("timeTimeCurrent3", System.currentTimeMillis().toString())
         imgvDetailCover.loadImage(this@MovieDetailActivity, response.body().images?.large!!)
-
+        toolbarLayout.title = response.body().title
     }
 
 }

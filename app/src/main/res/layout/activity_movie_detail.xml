@@ -16,29 +16,46 @@
             android:layout_height="match_parent"
             app:collapsedTitleTextAppearance="@style/CollapsedTitleTextAppearance"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginBottom="20dp"
+            app:expandedTitleMarginBottom="100dp"
             app:expandedTitleMarginStart="20dp"
             app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"
             app:layout_collapseMode="parallax"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
-            <ImageView
-                android:id="@+id/imgvDetailCover"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@mipmap/ic_cover_test"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.5" />
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="right"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="35dp"
-                android:background="@color/gold" />
+                <ImageView
+                    android:id="@+id/imgvDetailCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/placeHolderBg"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.5" />
+
+                <ImageView
+                    android:id="@+id/imgvDetailLike"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@mipmap/ic_detail_like_normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgvDetailShare"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@mipmap/ic_share"
+                    app:layout_constraintEnd_toStartOf="@+id/imgvDetailLike"
+                    app:layout_constraintTop_toTopOf="@+id/imgvDetailLike" />
+            </android.support.constraint.ConstraintLayout>
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -47,7 +64,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/NoBarTheme.PopupOverlay"
-                app:title="银翼杀手"
+                app:title=" "
                 app:titleTextColor="@color/titleColor" />
 
         </android.support.design.widget.CollapsingToolbarLayout>

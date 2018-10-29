@@ -9,4 +9,5 @@
     <color name="gold">#FFD700</color>
     <color name="typeColor">#ff6103</color>
     <color name="lineColor">#333333</color>
+    <color name="placeHolderBg">#333333</color>
 </resources>
