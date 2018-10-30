@@ -13,11 +13,13 @@ import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
-import hanyu.com.whattockotlin.commons.RecycleAdapter
+import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.jumpTo
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
+import hanyu.com.whattockotlin.network.NetworkManager
 import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
+import hanyu.com.whattockotlin.network.NetworkManager.putParam
 import hanyu.com.whattockotlin.network.NetworkManager.request
 import kotlinx.android.synthetic.main.fragment_latest.*
 import kotlinx.android.synthetic.main.item_movie.view.*
@@ -47,7 +49,10 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
     }
 
     private fun getData() {
-        val params = mapOf("start" to 0, "count" to 20, "city" to "广州")
+        val params = NetworkManager.getBaseParams()
+                .putParam("start", 0)
+                .putParam("count", 20)
+                .putParam("city", "广州")
         request(getIAPIByGson().getLatestMovie(params = params), object : Callback<SubjectBean> {
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
                 requestResponse(response)

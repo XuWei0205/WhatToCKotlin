@@ -16,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by HanYu on 2018/10/26.
  */
 object NetworkManager {
+    private var params = HashMap<String, Any>()
     private val httpClientBuilder = OkHttpClient.Builder()
     @JvmStatic
     fun <T> request(call: Call<T>, callback: Callback<T>) {
@@ -50,5 +51,15 @@ object NetworkManager {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
             httpClientBuilder.addInterceptor(httpLoggingInterceptor)
         }
+    }
+
+    fun getBaseParams(): HashMap<String, Any> {
+        params["apikey"] = API.DOUBAN_APP_API_KEY
+        return params
+    }
+
+    fun HashMap<String, Any>.putParam(key: String, value: Any): HashMap<String, Any> {
+        params[key] = value
+        return params
     }
 }

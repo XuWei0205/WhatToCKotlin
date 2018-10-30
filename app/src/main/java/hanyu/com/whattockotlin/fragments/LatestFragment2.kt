@@ -16,9 +16,11 @@ import hanyu.com.whattockotlin.activities.MovieDetailActivity
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
-import hanyu.com.whattockotlin.commons.RecycleAdapter
+import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import hanyu.com.whattockotlin.network.NetworkManager
+import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
+import hanyu.com.whattockotlin.network.NetworkManager.putParam
 import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,7 +50,10 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
     }
 
     private fun getData() {
-        val params = mapOf("start" to 0, "count" to 20, "city" to "北京")
+        val params = getBaseParams()
+                .putParam("start", 0)
+                .putParam("count", 20)
+                .putParam("city", "北京")
         NetworkManager.request(NetworkManager.getIAPIByGson().getLatestMovie(params = params), object : Callback<SubjectBean> {
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
                 requestResponse(response)
@@ -62,7 +67,7 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
     fun requestResponse(response: Response<SubjectBean>) {
         val dataList: ArrayList<MoviesBean> = response.body().subjects!!
-        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList,this, BR.item_movie)
+        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList, this, BR.item_movie)
         mListAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
             startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))

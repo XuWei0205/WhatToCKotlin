@@ -44,8 +44,8 @@ interface IAPI {
     /**获取电影详情**/
 
 
-    //api.douban.com/v2/movie/subject/1764796
+    @JvmSuppressWildcards
     @GET("/v2/movie/subject/{movieID}")
-    fun movieDetail(@Path("movieID") movieId: String):Call<MoviesBean>
+    fun movieDetail(@Path("movieID") movieId: String,@QueryMap params: Map<String, Any>):Call<MoviesBean>
 
 }

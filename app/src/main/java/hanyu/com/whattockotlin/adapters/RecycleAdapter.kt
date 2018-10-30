@@ -1,4 +1,4 @@
-package hanyu.com.whattockotlin.commons
+package hanyu.com.whattockotlin.adapters
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
