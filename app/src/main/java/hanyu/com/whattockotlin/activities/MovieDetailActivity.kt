@@ -5,11 +5,11 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.commons.Router
+import hanyu.com.whattockotlin.commons.SuperLog
 import hanyu.com.whattockotlin.commons.loadImage
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
 import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
@@ -24,10 +24,10 @@ import retrofit2.Response
  */
 @Route(path = Router.MOVIE_DETAIL)
 class MovieDetailActivity : BaseActivity() {
-    @Autowired(name = "movieId")
-    lateinit var movieId: String
+    private lateinit var movieId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        movieId = intent.getStringExtra("movieId")
         setContentView(R.layout.activity_movie_detail)
         setSupportActionBar(toolbar)
         if (Build.VERSION.SDK_INT >= 21) {
