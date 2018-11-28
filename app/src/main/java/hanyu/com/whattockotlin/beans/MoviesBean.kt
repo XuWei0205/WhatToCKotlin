@@ -24,6 +24,9 @@ open class MoviesBean : DataBean() {
 
 
     private fun getCastsBean(dataList: ArrayList<CastsBean>): String {
+        if (dataList.size == 0) {
+            return ""
+        }
         val casts = StringBuilder()
         for (tmpBean in dataList) {
             casts.append("/").append(tmpBean.name)
@@ -40,6 +43,9 @@ open class MoviesBean : DataBean() {
     }
 
     fun getGenres(): String {
+        if (this.genres!!.size == 0) {
+            return ""
+        }
         val type = StringBuilder()
         for (tmpType in this.genres!!) {
             type.append("/").append(tmpType)

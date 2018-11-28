@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
+import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
-import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.jumpTo
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding

@@ -13,10 +13,10 @@ import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.activities.MovieDetailActivity
+import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
-import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import hanyu.com.whattockotlin.network.NetworkManager
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams

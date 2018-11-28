@@ -5,13 +5,14 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.loadImage
-import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
+import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
 import hanyu.com.whattockotlin.network.NetworkManager.request
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import retrofit2.Call
@@ -23,6 +24,8 @@ import retrofit2.Response
  */
 @Route(path = Router.MOVIE_DETAIL)
 class MovieDetailActivity : BaseActivity() {
+    @Autowired(name = "movieId")
+    lateinit var movieId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
@@ -33,7 +36,7 @@ class MovieDetailActivity : BaseActivity() {
             decorView.systemUiVisibility = option
             window.statusBarColor = Color.TRANSPARENT
         }
-        getData(intent.getStringExtra("movieId"))
+        getData(movieId)
 
     }
 
