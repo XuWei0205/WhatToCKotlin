@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit
 object NetworkManager {
     private var params = HashMap<String, Any>()
     private var cacheSize = 10 * 1024 * 1024L // 10 MiB
+    private var timeout = 10 * 1000L
     private var cache = Cache(WTCApplication.app.cacheDir, cacheSize)
     private val internetInterceptor = Interceptor { chain ->
         val originalResponse = chain.proceed(chain.request())
@@ -67,6 +68,10 @@ object NetworkManager {
     }
     private var client = OkHttpClient().newBuilder()
             .cache(cache)
+            .connectTimeout(timeout, TimeUnit.MILLISECONDS)
+            .readTimeout(timeout, TimeUnit.MILLISECONDS)
+            .writeTimeout(timeout, TimeUnit.MILLISECONDS)
+            .retryOnConnectionFailure(true)
             .addNetworkInterceptor(internetInterceptor)
             .addInterceptor(offlineInterceptor)
 
