@@ -3,10 +3,7 @@ package hanyu.com.whattockotlin.network.apis
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 
 /**
  * Created by HanYu  on 2018/8/23.

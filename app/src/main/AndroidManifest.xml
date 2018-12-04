@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hanyu.com.whattockotlin">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -22,10 +23,6 @@
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.SplashActivity" />
         <activity android:name=".activities.MovieDetailActivity" />
-        <activity
-            android:name=".activities.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/NoBarTheme"></activity>
     </application>
 
 </manifest>

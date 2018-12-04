@@ -10,6 +10,7 @@ class WTCApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        app = this
         initARouter()
     }
 
@@ -19,5 +20,10 @@ class WTCApplication : Application() {
             ARouter.openDebug()
         }
         ARouter.init(this)
+    }
+
+    companion object {
+        @JvmStatic
+        lateinit var app: WTCApplication
     }
 }

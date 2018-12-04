@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.adapters.RecycleAdapter
@@ -15,10 +14,11 @@ import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
 import hanyu.com.whattockotlin.commons.Router
+import hanyu.com.whattockotlin.commons.Toaster
 import hanyu.com.whattockotlin.commons.jumpTo
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import hanyu.com.whattockotlin.network.NetworkManager
-import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
+import hanyu.com.whattockotlin.network.NetworkManager.getIAPI
 import hanyu.com.whattockotlin.network.NetworkManager.putParam
 import hanyu.com.whattockotlin.network.NetworkManager.request
 import kotlinx.android.synthetic.main.fragment_latest.*
@@ -53,12 +53,12 @@ open class LatestFragment : BaseFragment(), RecycleAdapter.IBindData {
                 .putParam("start", 0)
                 .putParam("count", 20)
                 .putParam("city", "广州")
-        request(getIAPIByGson().getLatestMovie(params = params), object : Callback<SubjectBean> {
+        request(getIAPI().getLatestMovie(params = params), object : Callback<SubjectBean> {
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
                 requestResponse(response)
             }
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
-                Toast.makeText(activity, "失败$t", Toast.LENGTH_SHORT).show()
+                Toaster.toast(activity!!, t.toString())
             }
         })
     }

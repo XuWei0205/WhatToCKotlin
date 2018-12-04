@@ -9,10 +9,9 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.commons.Router
-import hanyu.com.whattockotlin.commons.SuperLog
 import hanyu.com.whattockotlin.commons.loadImage
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
-import hanyu.com.whattockotlin.network.NetworkManager.getIAPIByGson
+import hanyu.com.whattockotlin.network.NetworkManager.getIAPI
 import hanyu.com.whattockotlin.network.NetworkManager.request
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import retrofit2.Call
@@ -44,7 +43,7 @@ class MovieDetailActivity : BaseActivity() {
         if (TextUtils.isEmpty(movieId)) {
             return
         }
-        request(getIAPIByGson().movieDetail(movieId, getBaseParams()), object : Callback<MoviesBean> {
+        request(getIAPI().movieDetail(movieId, getBaseParams()), object : Callback<MoviesBean> {
             override fun onFailure(call: Call<MoviesBean>?, t: Throwable?) {
             }
             override fun onResponse(call: Call<MoviesBean>?, response: Response<MoviesBean>) {

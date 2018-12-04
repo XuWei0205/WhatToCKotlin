@@ -17,6 +17,7 @@ import hanyu.com.whattockotlin.adapters.RecycleAdapter
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
+import hanyu.com.whattockotlin.commons.Toaster.toast
 import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import hanyu.com.whattockotlin.network.NetworkManager
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
@@ -54,12 +55,12 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
                 .putParam("start", 0)
                 .putParam("count", 20)
                 .putParam("city", "北京")
-        NetworkManager.request(NetworkManager.getIAPIByGson().getLatestMovie(params = params), object : Callback<SubjectBean> {
+        NetworkManager.request(NetworkManager.getIAPI().getLatestMovie(params = params), object : Callback<SubjectBean> {
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
                 requestResponse(response)
             }
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
-                Toast.makeText(activity, "失败$t", Toast.LENGTH_SHORT).show()
+                toast(activity!!, t.toString())
             }
         })
 
