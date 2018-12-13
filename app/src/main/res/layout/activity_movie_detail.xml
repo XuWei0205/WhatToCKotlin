@@ -79,4 +79,17 @@
     </android.support.v4.widget.NestedScrollView>
 
 
+    <TextView
+        android:id="@+id/tv_bug_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/buy_ticky_normal"
+        android:gravity="center"
+        android:text="@string/txt_buy_ticket"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
 </android.support.design.widget.CoordinatorLayout>
