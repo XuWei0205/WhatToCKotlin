@@ -18,6 +18,7 @@ class RatingBar : LinearLayout {
     companion object {
         private const val NORMAL_START_DRAWABLE_RESOURCE: Int = R.mipmap.ic_start_grey
         private const val SELECTED_START_DRAWABLE_RESOURCE: Int = R.mipmap.ic_start_red
+        private const val HALF_START_DRAWABLE_RESOURCE: Int = R.mipmap.ic_start_red
 
         @BindingAdapter("app:start")
         @JvmStatic
@@ -61,7 +62,7 @@ class RatingBar : LinearLayout {
     private fun setStart(start: Int) {
         var mRate = start
 
-        if (mRate < 0) {
+        if (start < 0) {
             mRate = 0
         } else if (mRate > 5) {
             mRate = 5
@@ -72,6 +73,28 @@ class RatingBar : LinearLayout {
             starts?.get(i)?.setImageResource(mResource)
         }
 
+
+    }
+
+    fun setHalfStart(rating: Float) {
+        var count = rating
+        if (count < 0) {
+            count = 0f
+        } else if (count > 5) {
+            count = 5f
+        }
+        var boolean = (rating % 1) != 0f
+        for (i in 0..4) {
+            val mResource: Int = when {
+                i + 1 < count -> NORMAL_START_DRAWABLE_RESOURCE
+                i + 1 > count && boolean -> {
+                    boolean = false
+                    HALF_START_DRAWABLE_RESOURCE
+                }
+                else -> NORMAL_START_DRAWABLE_RESOURCE
+            }
+            starts?.get(i)?.setImageResource(mResource)
+        }
 
     }
 

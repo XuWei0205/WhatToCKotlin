@@ -3,6 +3,7 @@ package hanyu.com.whattockotlin.activities
 import android.os.Bundle
 import com.chaychan.library.BottomBarItem
 import hanyu.com.whattockotlin.R
+import hanyu.com.whattockotlin.commons.SuperLog
 import hanyu.com.whattockotlin.commons.Toaster.toast
 import hanyu.com.whattockotlin.fragments.BaseFragment
 import hanyu.com.whattockotlin.fragments.LatestFragment
@@ -24,8 +25,8 @@ class MainActivity : BaseActivity() {
 
     private fun initView() {
         bottomBarLayout.currentItem = 1
-        bottomBarLayout.setOnItemSelectedListener { bottomBarItem: BottomBarItem, oldPosition: Int, newposition: Int ->
-            val f = jumpToFragment(newposition)!!.show()
+        bottomBarLayout.setOnItemSelectedListener { _: BottomBarItem, _: Int, newPosition: Int ->
+            val f = jumpToFragment(newPosition)!!.show()
             fragments.filter { it != f }.forEach { it?.hide() }
             currentFragment = f
         }
