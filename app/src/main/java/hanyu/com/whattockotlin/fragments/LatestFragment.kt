@@ -3,6 +3,8 @@ package hanyu.com.whattockotlin.fragments
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.os.Message
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +22,6 @@ import hanyu.com.whattockotlin.network.NetworkManager
 import hanyu.com.whattockotlin.network.NetworkManager.getIAPI
 import hanyu.com.whattockotlin.network.NetworkManager.putParam
 import hanyu.com.whattockotlin.network.NetworkManager.request
-import kotlinx.android.synthetic.main.banner_content.*
 import kotlinx.android.synthetic.main.fragment_latest.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call
@@ -28,16 +29,20 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * Created by HanYu on 2018/8/23.
+ * Created by HanYu on 218/8/23.
  */
 class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWeakCallBack {
 
 
-    private lateinit var mListAdapter: RecycleAdapter
+
     private var weakHandler = WeakHandler(this.javaClass, this)
     private var bannerList = arrayListOf<MoviesBean>()
+    private val dataList = arrayListOf<MoviesBean>()
     private var bannerAdapter = BannerAdapter(bannerList)
-
+    private var mListAdapter = RecycleAdapter(R.layout.item_movie, dataList, this, BR.item_movie)
+    private var vp: ViewPager? = null
+    private var index = 0
+    private var bannerPosition = 1
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_latest
@@ -70,16 +75,20 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
     }
 
     fun requestResponse(response: Response<SubjectBean>) {
-        val dataList: ArrayList<MoviesBean> = response.body().subjects!!
+        dataList.addAll(response.body().subjects!!)
+        //bannerList.add(dataList[4])
         bannerList.addAll(dataList.subList(0, 5))
+        // bannerList.add(dataList[0])
+        // vp?.currentItem = 1
         bannerAdapter.notifyDataSetChanged()
-        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList,this, BR.item_movie)
+        mListAdapter.notifyDataSetChanged()
         mListAdapter.setOnItemClickListener { _, _, position ->
             jumpTo(Router.MOVIE_DETAIL).withString("movieId", dataList[position].id).navigation()
         }
         rvMainList.adapter = mListAdapter
         rvMainList.layoutManager = LinearLayoutManager(activity)
         mListAdapter.openLoadAnimation()
+        weakHandler.sendEmptyMessage(1)
 
     }
 
@@ -93,18 +102,63 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
     }
 
     private fun initBanner() {
-        vpMainBanner.apply {
-            pageMargin = 40
+        val view = layoutInflater.inflate(R.layout.banner_content, rvMainList.parent as ViewGroup, false)
+        mListAdapter.addHeaderView(view)
+        vp = view.findViewById<ViewPager>(R.id.vpMainBanner).apply {
+            pageMargin = 4
             offscreenPageLimit = 3
             setPageTransformer(true, MyPageTransformer())
             adapter = bannerAdapter
+            addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    position.let {
+                        if (position == 0) {
+                        }
+                    }
+                    bannerPosition = position
+                }
+            })
 
         }
 
     }
 
-    override fun onHandleMessage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onHandleMessage(msg: Message?) {
+        when (msg?.what) {
+            1 -> {
+                if (bannerList.size == 0) {
+                    return
+                }
+                vp!!.currentItem = index % bannerList.size
+                weakHandler.sendEmptyMessageDelayed(1, 5000)
+                index++
+            }
+        }
+        /* when (msg?.what) {
+             1 -> {
+                 if (bannerList.size == 0) {
+                     return
+                 }
+                 vp!!.currentItem = when (bannerPosition) {
+                     bannerList.size - 2 -> {
+                         index += 2
+                         1
+                     }
+                     else -> {
+                         index++
+                         index % bannerList.size
+                     }
+                 }
+                 weakHandler.sendEmptyMessageDelayed(1, 3000)
+
+             }
+         }*/
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        weakHandler.removeMessages(1)
+    }
+
 
 }

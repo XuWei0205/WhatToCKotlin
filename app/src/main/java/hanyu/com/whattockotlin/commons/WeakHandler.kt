@@ -2,6 +2,7 @@ package hanyu.com.whattockotlin.commons
 
 import android.os.Handler
 import android.os.Message
+import hanyu.com.whattockotlin.fragments.LatestFragment
 import java.lang.ref.WeakReference
 
 /**
@@ -15,10 +16,10 @@ class WeakHandler<T>(t: Class<T>, private val callback: IWeakCallBack) : Handler
         if (theT == null) {
             return
         }
-        callback.onHandleMessage()
+        callback.onHandleMessage(msg)
     }
 
     interface IWeakCallBack {
-        fun onHandleMessage()
+        fun onHandleMessage(msg: Message?)
     }
 }
