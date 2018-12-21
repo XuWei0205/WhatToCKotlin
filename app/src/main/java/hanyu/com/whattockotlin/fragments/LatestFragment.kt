@@ -2,6 +2,7 @@ package hanyu.com.whattockotlin.fragments
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Message
 import android.support.v4.view.ViewPager
@@ -43,6 +44,7 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
     private var vp: ViewPager? = null
     private var index = 0
     private var bannerPosition = 1
+    private var pageIndex = 0
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_latest
@@ -55,39 +57,55 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        getData()
+        rvMainList.adapter = mListAdapter
+        rvMainList.layoutManager = LinearLayoutManager(activity!!)
+        mListAdapter.openLoadAnimation()
+        mListAdapter.setOnItemClickListener { _, _, position ->
+            jumpTo(Router.MOVIE_DETAIL).withString("movieId", dataList[position].id).navigation()
+        }
+        requestData(false)
+        initRefreshLayout()
         initBanner()
     }
 
-    private fun getData() {
+    private fun requestData(isLoadMore: Boolean) {
+        if (!isLoadMore) {
+            mListAdapter.setEnableLoadMore(false)
+        }
         val params = NetworkManager.getBaseParams()
-                .putParam("start", 0)
+                .putParam("start", pageIndex * 20)
                 .putParam("count", 20)
                 .putParam("city", "广州")
         request(getIAPI().getLatestMovie(params = params), object : Callback<SubjectBean> {
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
-                requestResponse(response)
+                mListAdapter.setEnableLoadMore(true)
+                swipeLayout.isRefreshing = false
+                requestResponse(response, isLoadMore)
+                if (isLoadMore) {
+                    mListAdapter.loadMoreComplete()
+                }
+                pageIndex++
             }
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
                 Toaster.toast(activity!!, t.toString())
+                swipeLayout.isRefreshing = false
+                pageIndex = 0
             }
         })
     }
 
-    fun requestResponse(response: Response<SubjectBean>) {
-        dataList.addAll(response.body().subjects!!)
-        //bannerList.add(dataList[4])
-        bannerList.addAll(dataList.subList(0, 5))
-        // bannerList.add(dataList[0])
-        // vp?.currentItem = 1
-        bannerAdapter.notifyDataSetChanged()
-        mListAdapter.notifyDataSetChanged()
-        mListAdapter.setOnItemClickListener { _, _, position ->
-            jumpTo(Router.MOVIE_DETAIL).withString("movieId", dataList[position].id).navigation()
+    fun requestResponse(response: Response<SubjectBean>, isLoadMore: Boolean) {
+        if (!isLoadMore) {
+            dataList.clear()
+            bannerList.clear()
         }
-        rvMainList.adapter = mListAdapter
-        rvMainList.layoutManager = LinearLayoutManager(activity)
-        mListAdapter.openLoadAnimation()
+        dataList.addAll(response.body().subjects!!)
+        if (!isLoadMore) {
+            bannerList.addAll(dataList.subList(0, 5))
+            bannerAdapter.notifyDataSetChanged()
+        }
+        mListAdapter.notifyDataSetChanged()
+        weakHandler.removeMessages(1)
         weakHandler.sendEmptyMessage(1)
 
     }
@@ -111,11 +129,7 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
             adapter = bannerAdapter
             addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                    position.let {
-                        if (position == 0) {
-                        }
-                    }
-                    bannerPosition = position
+                   bannerPosition = position
                 }
             })
 
@@ -134,26 +148,22 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
                 index++
             }
         }
-        /* when (msg?.what) {
-             1 -> {
-                 if (bannerList.size == 0) {
-                     return
-                 }
-                 vp!!.currentItem = when (bannerPosition) {
-                     bannerList.size - 2 -> {
-                         index += 2
-                         1
-                     }
-                     else -> {
-                         index++
-                         index % bannerList.size
-                     }
-                 }
-                 weakHandler.sendEmptyMessageDelayed(1, 3000)
 
-             }
-         }*/
     }
+
+    private fun initRefreshLayout() {
+        swipeLayout.apply {
+            setColorSchemeColors(Color.rgb(193, 29, 84))
+            isRefreshing = true
+            setOnRefreshListener { pageIndex = 0; requestData(false) }
+        }
+        mListAdapter.apply {
+            setOnLoadMoreListener {
+                requestData(true)
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
