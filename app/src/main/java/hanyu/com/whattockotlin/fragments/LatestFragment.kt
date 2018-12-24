@@ -34,13 +34,10 @@ import retrofit2.Response
  */
 class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWeakCallBack {
 
-
-
     private var weakHandler = WeakHandler(this.javaClass, this)
     private var bannerList = arrayListOf<MoviesBean>()
-    private val dataList = arrayListOf<MoviesBean>()
     private var bannerAdapter = BannerAdapter(bannerList)
-    private var mListAdapter = RecycleAdapter(R.layout.item_movie, dataList, this, BR.item_movie)
+    private var mListAdapter = RecycleAdapter(R.layout.item_movie, this, BR.item_movie)
     private var vp: ViewPager? = null
     private var index = 0
     private var bannerPosition = 1
@@ -61,7 +58,7 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
         rvMainList.layoutManager = LinearLayoutManager(activity!!)
         mListAdapter.openLoadAnimation()
         mListAdapter.setOnItemClickListener { _, _, position ->
-            jumpTo(Router.MOVIE_DETAIL).withString("movieId", dataList[position].id).navigation()
+            jumpTo(Router.MOVIE_DETAIL).withString("movieId", (mListAdapter.getItem(position) as MoviesBean).id).navigation()
         }
         requestData(false)
         initRefreshLayout()
@@ -70,6 +67,7 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
 
     private fun requestData(isLoadMore: Boolean) {
         if (!isLoadMore) {
+            pageIndex = 0
             mListAdapter.setEnableLoadMore(false)
         }
         val params = NetworkManager.getBaseParams()
@@ -78,36 +76,35 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
                 .putParam("city", "广州")
         request(getIAPI().getLatestMovie(params = params), object : Callback<SubjectBean> {
             override fun onResponse(call: Call<SubjectBean>?, response: Response<SubjectBean>) {
-                mListAdapter.setEnableLoadMore(true)
-                swipeLayout.isRefreshing = false
-                requestResponse(response, isLoadMore)
                 if (isLoadMore) {
+                    mListAdapter.addData((response.body().subjects as List<DataBean>?)!!)
+                } else {
+                    mListAdapter.setNewData(response.body().subjects as List<DataBean>?)
+                    bannerList.addAll(response.body().subjects!!.subList(0, 5))
+                    bannerAdapter.notifyDataSetChanged()
+                    weakHandler.removeMessages(1)
+                    weakHandler.sendEmptyMessage(1)
+                    mListAdapter.setEnableLoadMore(true)
+                    swipeLayout.isRefreshing = false
+                }
+                if (response.body().subjects!!.size < 20) {
+                    mListAdapter.loadMoreEnd(false)
+                } else {
                     mListAdapter.loadMoreComplete()
                 }
                 pageIndex++
             }
+
             override fun onFailure(call: Call<SubjectBean>?, t: Throwable?) {
                 Toaster.toast(activity!!, t.toString())
-                swipeLayout.isRefreshing = false
-                pageIndex = 0
+                if (isLoadMore) {
+                    mListAdapter.loadMoreFail()
+                } else {
+                    mListAdapter.setEnableLoadMore(true)
+                    swipeLayout.isRefreshing = false
+                }
             }
         })
-    }
-
-    fun requestResponse(response: Response<SubjectBean>, isLoadMore: Boolean) {
-        if (!isLoadMore) {
-            dataList.clear()
-            bannerList.clear()
-        }
-        dataList.addAll(response.body().subjects!!)
-        if (!isLoadMore) {
-            bannerList.addAll(dataList.subList(0, 5))
-            bannerAdapter.notifyDataSetChanged()
-        }
-        mListAdapter.notifyDataSetChanged()
-        weakHandler.removeMessages(1)
-        weakHandler.sendEmptyMessage(1)
-
     }
 
     override fun onBind(binding: ViewDataBinding, dataBean: DataBean) {
@@ -158,9 +155,7 @@ class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWe
             setOnRefreshListener { pageIndex = 0; requestData(false) }
         }
         mListAdapter.apply {
-            setOnLoadMoreListener {
-                requestData(true)
-            }
+            setOnLoadMoreListener({ requestData(true) }, rvMainList)
         }
     }
 

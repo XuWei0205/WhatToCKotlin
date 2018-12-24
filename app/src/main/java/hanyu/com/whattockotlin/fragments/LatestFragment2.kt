@@ -68,7 +68,7 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
     fun requestResponse(response: Response<SubjectBean>) {
         val dataList: ArrayList<MoviesBean> = response.body().subjects!!
-        mListAdapter = RecycleAdapter(R.layout.item_movie, dataList, this, BR.item_movie)
+        mListAdapter = RecycleAdapter(R.layout.item_movie,  this, BR.item_movie)
         mListAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
             startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))

@@ -13,7 +13,7 @@ import hanyu.com.whattockotlin.beans.DataBean
 /**
  * Created by HanYu on 2018/8/24.
  */
-class RecycleAdapter(layoutId: Int, data: List<DataBean>, private var bindListener: IBindData, private var varvariableId: Int) : BaseQuickAdapter<DataBean, RecycleAdapter.ItemViewHolder>(layoutId, data) {
+class RecycleAdapter(layoutId: Int, private var bindListener: IBindData, private var variableId: Int) : BaseQuickAdapter<DataBean, RecycleAdapter.ItemViewHolder>(layoutId) {
 
 
     override fun convert(helper: ItemViewHolder, dataBean: DataBean?) {
@@ -30,7 +30,7 @@ class RecycleAdapter(layoutId: Int, data: List<DataBean>, private var bindListen
 
 
     override fun onCreateDefViewHolder(parent: ViewGroup?, viewType: Int): ItemViewHolder {
-        return super.onCreateDefViewHolder(parent, viewType).setBindingListener(bindListener).setVariableId(varvariableId)
+        return super.onCreateDefViewHolder(parent, viewType).setBindingListener(bindListener).setVariableId(variableId)
     }
 
 
