@@ -1,8 +1,12 @@
 package hanyu.com.whattockotlin.activities
 
-import android.support.annotation.CallSuper
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
+import com.gyf.barlibrary.ImmersionBar
+import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.fragments.BaseFragment
+import me.jessyan.autosize.AutoSize
 
 /**
  * Created by HanYu on 2018/8/22.
@@ -31,6 +35,26 @@ open class BaseActivity : AppCompatActivity(){
         fragmentTransaction.commitAllowingStateLoss()
         return fragment
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fixStatusBar()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        AutoSize.autoConvertDensityOfGlobal(this)
+    }
+    private fun fixStatusBar() {
+        ImmersionBar.with(this)
+                .init()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ImmersionBar.with(this).destroy()
     }
 
 

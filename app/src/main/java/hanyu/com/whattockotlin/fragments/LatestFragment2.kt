@@ -22,6 +22,7 @@ import hanyu.com.whattockotlin.databinding.LatestFragmentDataBinding
 import hanyu.com.whattockotlin.network.NetworkManager
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
 import hanyu.com.whattockotlin.network.NetworkManager.putParam
+import kotlinx.android.synthetic.main.fragment_latest.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +34,7 @@ import retrofit2.Response
 open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
     private lateinit var mListAdapter: RecycleAdapter
-    private lateinit var recyclerView: RecyclerView
+    //private lateinit var recyclerView: RecyclerView
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_latest
@@ -46,7 +47,7 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = view.findViewById(R.id.rvMainList)
+        //recyclerView = view.findViewById(R.id.rvMainList)
         getData()
     }
 
@@ -73,8 +74,8 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
             Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
             startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))
         }
-        recyclerView.adapter = mListAdapter
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        rvMainList.adapter = mListAdapter
+        rvMainList.layoutManager = LinearLayoutManager(activity)
 
     }
 

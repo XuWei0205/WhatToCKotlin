@@ -58,6 +58,8 @@ dependencies {
     compile 'com.alibaba:arouter-api:1.4.0'
     kapt 'com.alibaba:arouter-compiler:1.2.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.gyf.immersionbar:immersionbar:2.3.3-beta15'
+    compile 'me.jessyan:autosize:1.1.1'
 }
 
 

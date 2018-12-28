@@ -3,7 +3,6 @@ package hanyu.com.whattockotlin.activities
 import android.os.Bundle
 import com.chaychan.library.BottomBarItem
 import hanyu.com.whattockotlin.R
-import hanyu.com.whattockotlin.commons.SuperLog
 import hanyu.com.whattockotlin.commons.Toaster.toast
 import hanyu.com.whattockotlin.fragments.BaseFragment
 import hanyu.com.whattockotlin.fragments.LatestFragment
@@ -44,4 +43,10 @@ class MainActivity : BaseActivity() {
         fragments[position] = fragment
         return fragment
     }
+/*
+    override fun onResume() {
+        super.onResume()
+        val tu = TestUtil()
+        tu.getStatusBarHeight(this)
+    }*/
 }

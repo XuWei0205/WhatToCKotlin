@@ -5,4 +5,5 @@ package hanyu.com.whattockotlin.activities
  */
 class SplashActivity : BaseActivity(){
 
+
 }
