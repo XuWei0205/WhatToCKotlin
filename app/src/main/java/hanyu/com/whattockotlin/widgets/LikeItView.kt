@@ -1,5 +1,7 @@
 package hanyu.com.whattockotlin.widgets
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.*
@@ -28,9 +30,11 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     private var alphaScale = 0f
     private var shiningScale = 0f
     private var isFirst = false
-    private var textAlpha = 0
+    private var textAlpha = 0f
     private var maxTextMove = 0
-    private var maxTextDistance = 0
+    private var textDistance = 0
+    private var widths: FloatArray = floatArrayOf()
+    private var animationDuration: Long = 250
 
     init {
         val typedArray: TypedArray = context!!.obtainStyledAttributes(attrs, R.styleable.LikeItView)
@@ -164,21 +168,41 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         //获取文字边界
         textPaint?.getTextBounds(likeValue, 0, likeValue.length, textRound)
         //文字x轴坐标
-        val textX = likeBitmap!!.width + dpToPx(context, 20f)
+        var textX = likeBitmap!!.width + dpToPx(context, 20f)
         val textY = (height - textRound!!.top - textRound!!.bottom) / 2
         //点赞前后数字位数发生变化 99->100 999->1000
         if (likeValue.length != changeValue.length) {
-            oldTextPaint?.alpha = 225 * (1 - textAlpha)
+            oldTextPaint?.alpha = (225 * (1 - textAlpha)).toInt()
             val moveRange = if (isLike) {
-                (textY + maxTextMove - maxTextDistance).toFloat()
+                (textY + maxTextMove - textDistance).toFloat()
             } else {
-                (textY + maxTextMove + maxTextDistance).toFloat()
+                (textY + maxTextMove + textDistance).toFloat()
             }
             canvas.drawText(changeValue, textX.toFloat(), moveRange, oldTextPaint)
-            textPaint?.alpha = 225 * textAlpha
-            canvas.drawText(likeValue, textX.toFloat(), (textY - maxTextDistance).toFloat(), textPaint)
+            textPaint?.alpha = (225 * textAlpha).toInt()
+            canvas.drawText(likeValue, textX.toFloat(), (textY + textDistance).toFloat(), textPaint)
         }else{
-         //点赞前后点赞位数不发生变化
+            //点赞前后点赞位数不发生变化
+            textPaint?.getTextWidths(likeValue, widths)
+            val chars = likeValue.toCharArray()
+            val oldChars = changeValue.toCharArray()
+            chars.forEachIndexed { index, c ->
+                if (oldChars[index] == c) {
+                    textPaint?.alpha = 225
+                    canvas.drawText(likeValue, textX.toFloat(), textY.toFloat(), textPaint)
+                } else {
+                    oldTextPaint?.alpha = (225 * (1 - textAlpha)).toInt()
+                    val textMoveRange = if (isLike) {
+                        (textY + maxTextMove + textDistance).toFloat()
+                    } else {
+                        (textY - maxTextMove + textDistance).toFloat()
+                    }
+                    canvas.drawText(oldChars[index].toString(), textX.toFloat(), textMoveRange, oldTextPaint)
+                    textPaint?.alpha = (225 * textAlpha).toInt()
+                    canvas.drawText(c.toString(), textX.toFloat(), (textY + textDistance).toFloat(), textPaint)
+                }
+                textX += widths[index].toInt()
+            }
 
         }
 
@@ -192,7 +216,6 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 clickLickIt()
-
             }
             MotionEvent.ACTION_UP -> {
                 performClick()
@@ -203,11 +226,46 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
     private fun clickLickIt() {
         isLike = !isLike
+        ++likeNumber
+        setLikeNumberAnimation()
+
+
+    }
+
+    //设置数字变化动画
+    private fun setLikeNumberAnimation() {
+        val animationX = if (isLike) {
+            maxTextMove
+        } else {
+            -maxTextMove
+        }
+
+        val textAlphaAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "textAlpha", 0f, 1f)
+        textAlphaAnimator.duration = animationDuration
+        val textMoveAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "textTranslate", animationX.toFloat(), 0f)
+        textMoveAnimator.duration = animationDuration
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(textAlphaAnimator, textMoveAnimator)
+        animatorSet.start()
+
     }
 
     private fun setAlphaScale(alphaScale: Float) {
         this.alphaScale = alphaScale
         invalidate()
     }
+
+    private fun setTextDistance(textDistance: Int) {
+        this.textDistance = textDistance
+        invalidate()
+    }
+
+
+    private fun setTextAlpha(textAlpha: Float) {
+        this.textAlpha = textAlpha
+        invalidate()
+    }
+
 
 }
