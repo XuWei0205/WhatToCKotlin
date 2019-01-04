@@ -31,15 +31,15 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     private var shiningScale = 0f
     private var isFirst = false
     private var textAlpha = 0f
-    private var maxTextMove = 0
-    private var textDistance = 0
-    private var widths: FloatArray = floatArrayOf()
+    private var maxTextMove = 0f
+    private var textDistance = 0f
+    private var widths: FloatArray = FloatArray(8)
     private var animationDuration: Long = 250
-
+    private var shiningAlpha = 0f
     init {
         val typedArray: TypedArray = context!!.obtainStyledAttributes(attrs, R.styleable.LikeItView)
         likeNumber = typedArray.getInt(R.styleable.LikeItView_like_num, 0)
-        maxTextMove = dpToPx(context, 20f)
+        maxTextMove = dpToPx(context, 20f).toFloat()
         typedArray.recycle()
         initPaint()
 
@@ -82,9 +82,8 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var mWidthMeasureSpec = widthMeasureSpec
-        var mHeightMeasureSpec = heightMeasureSpec
-        mHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec(unlikeBitmap?.height!!.plus(dpToPx(context, 20f)), View.MeasureSpec.EXACTLY)
+        val mWidthMeasureSpec: Int
+        val mHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec(unlikeBitmap?.height!!.plus(dpToPx(context, 20f)), View.MeasureSpec.EXACTLY)
         val textNumber = likeNumber.toString()
         val textWidth = textPaint?.measureText(textNumber, 0, textNumber.length)
         mWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(likeBitmap?.width!!.plus(textWidth!!).plus(dpToPx(context, 30f)).toInt(), View.MeasureSpec.EXACTLY)
@@ -129,7 +128,7 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
 
     private fun drawShining(canvas: Canvas) {
-        val top = height - likeBitmap?.height!! + dpToPx(context, 17f)
+        val top = (height - likeBitmap?.height!!) / 2 - shiningBitmap!!.height + dpToPx(context, 17f)
         //设置透明度
         bitmapPaint?.alpha = (225 * alphaScale).toInt()
         //保存画布状态
@@ -152,16 +151,17 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     }
 
     private fun drawText(canvas: Canvas) {
+        maxTextMove = dpToPx(context, 20f).toFloat()
         val likeValue = likeNumber.toString()
-        var changeValue = likeValue
+        val changeValue: String
         if (isLike) {
             changeValue = (likeNumber - 1).toString()
         } else {
             if (isFirst) {
-                changeValue = (likeValue + 1).toString()
+                changeValue = (likeNumber + 1).toString()
             } else {
                 isFirst = true
-                changeValue = likeValue.toString()
+                changeValue = likeValue
             }
         }
 
@@ -169,18 +169,18 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         textPaint?.getTextBounds(likeValue, 0, likeValue.length, textRound)
         //文字x轴坐标
         var textX = likeBitmap!!.width + dpToPx(context, 20f)
-        val textY = (height - textRound!!.top - textRound!!.bottom) / 2
+        val textY = (height - textRound!!.top - textRound!!.bottom) / 2//???
         //点赞前后数字位数发生变化 99->100 999->1000
-        if (likeValue.length != changeValue.length) {
+        if (likeValue.length != changeValue.length || maxTextMove == 0f) {
             oldTextPaint?.alpha = (225 * (1 - textAlpha)).toInt()
             val moveRange = if (isLike) {
-                (textY + maxTextMove - textDistance).toFloat()
+                (textY - maxTextMove + textDistance)
             } else {
-                (textY + maxTextMove + textDistance).toFloat()
+                (textY + maxTextMove + textDistance)
             }
             canvas.drawText(changeValue, textX.toFloat(), moveRange, oldTextPaint)
             textPaint?.alpha = (225 * textAlpha).toInt()
-            canvas.drawText(likeValue, textX.toFloat(), (textY + textDistance).toFloat(), textPaint)
+            canvas.drawText(likeValue, textX.toFloat(), (textY + textDistance), textPaint)
         }else{
             //点赞前后点赞位数不发生变化
             textPaint?.getTextWidths(likeValue, widths)
@@ -189,13 +189,13 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
             chars.forEachIndexed { index, c ->
                 if (oldChars[index] == c) {
                     textPaint?.alpha = 225
-                    canvas.drawText(likeValue, textX.toFloat(), textY.toFloat(), textPaint)
+                    canvas.drawText(chars[index].toString(), textX.toFloat(), textY.toFloat(), textPaint)
                 } else {
                     oldTextPaint?.alpha = (225 * (1 - textAlpha)).toInt()
                     val textMoveRange = if (isLike) {
-                        (textY + maxTextMove + textDistance).toFloat()
+                        (textY - maxTextMove + textDistance)
                     } else {
-                        (textY - maxTextMove + textDistance).toFloat()
+                        (textY + maxTextMove + textDistance)
                     }
                     canvas.drawText(oldChars[index].toString(), textX.toFloat(), textMoveRange, oldTextPaint)
                     textPaint?.alpha = (225 * textAlpha).toInt()
@@ -226,7 +226,21 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
     private fun clickLickIt() {
         isLike = !isLike
-        ++likeNumber
+        //点击时手指放大与缩小动画
+        val handScaleAnimator = ObjectAnimator.ofFloat(this, "handScale", 1f, 0.8f, 1f)
+        handScaleAnimator.duration = animationDuration
+        if (isLike) {
+            ++likeNumber
+            val shiningScaleAnimator = ObjectAnimator.ofFloat(this, "shiningScale", 0f, 1f)
+            val shiningAlphaAnimator = ObjectAnimator.ofFloat(this, "shiningAlpha", 0f, 1f)
+            val animatorSet = AnimatorSet()
+            animatorSet.playTogether(handScaleAnimator, shiningScaleAnimator, shiningAlphaAnimator)
+            animatorSet.start()
+        } else {
+            --likeNumber
+            handScaleAnimator.start()
+            setShiningAlpha(0f)
+        }
         setLikeNumberAnimation()
 
 
@@ -234,7 +248,7 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
     //设置数字变化动画
     private fun setLikeNumberAnimation() {
-        val animationX = if (isLike) {
+        val animationY = if (isLike) {
             maxTextMove
         } else {
             -maxTextMove
@@ -242,7 +256,7 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
         val textAlphaAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "textAlpha", 0f, 1f)
         textAlphaAnimator.duration = animationDuration
-        val textMoveAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "textTranslate", animationX.toFloat(), 0f)
+        val textMoveAnimator: ObjectAnimator = ObjectAnimator.ofFloat(this, "textTranslate", animationY, 0f)
         textMoveAnimator.duration = animationDuration
 
         val animatorSet = AnimatorSet()
@@ -251,19 +265,39 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
 
     }
 
-    private fun setAlphaScale(alphaScale: Float) {
+    fun setAlphaScale(alphaScale: Float) {
         this.alphaScale = alphaScale
         invalidate()
     }
 
-    private fun setTextDistance(textDistance: Int) {
-        this.textDistance = textDistance
+
+    fun setTextAlpha(textAlpha: Float) {
+        this.textAlpha = textAlpha
         invalidate()
     }
 
+    fun setTextTranslate(textTranslate: Float) {
+        textDistance = textTranslate
+        invalidate()
+    }
 
-    private fun setTextAlpha(textAlpha: Float) {
-        this.textAlpha = textAlpha
+    fun setHandScale(handScale: Float) {
+        this.handScale = handScale
+        invalidate()
+    }
+
+    fun setShiningScale(shiningScale: Float) {
+        this.shiningScale = shiningScale
+        invalidate()
+    }
+
+    fun setShiningAlpha(shiningAlpha: Float) {
+        this.shiningAlpha = shiningAlpha
+        invalidate()
+    }
+
+    fun setLikeNum(likeNum: Int) {
+        this.likeNumber = likeNumber
         invalidate()
     }
 

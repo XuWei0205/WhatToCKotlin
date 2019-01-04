@@ -10,4 +10,5 @@
     <color name="typeColor">#ff6103</color>
     <color name="lineColor">#333333</color>
     <color name="placeHolderBg">#333333</color>
+    <color name="likeColor">#ffd500</color>
 </resources>

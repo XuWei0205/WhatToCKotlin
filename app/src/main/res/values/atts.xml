@@ -8,4 +8,8 @@
         <attr name="round" format="float" />
         <attr name="glideImgvUrl" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="LikeItView">
+        <attr name="like_num" format="integer" />
+    </declare-styleable>
 </resources>
