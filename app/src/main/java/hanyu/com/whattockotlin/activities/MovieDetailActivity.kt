@@ -36,6 +36,7 @@ class MovieDetailActivity : BaseActivity() {
             window.statusBarColor = Color.TRANSPARENT
         }
         getData(movieId)
+        test()
 
     }
 
@@ -57,4 +58,7 @@ class MovieDetailActivity : BaseActivity() {
         toolbarLayout.title = response.body().title
     }
 
+    private fun test(){
+        likeView.setLikeNum(12)
+    }
 }

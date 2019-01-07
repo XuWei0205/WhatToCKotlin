@@ -297,8 +297,7 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
     }
 
     fun setLikeNum(likeNum: Int) {
-        this.likeNumber = likeNumber
-        invalidate()
+        this.likeNumber = likeNum
     }
 
 
