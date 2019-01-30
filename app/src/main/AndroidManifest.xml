@@ -27,6 +27,7 @@
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.SplashActivity" />
         <activity android:name=".activities.MovieDetailActivity" />
+        <activity android:name=".activities.TestActivity" />
     </application>
 
 </manifest>

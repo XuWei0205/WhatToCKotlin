@@ -60,12 +60,10 @@ class RatingBar : LinearLayout {
 
 
     private fun setStart(start: Int) {
-        var mRate = start
-
-        if (start < 0) {
-            mRate = 0
-        } else if (mRate > 5) {
-            mRate = 5
+        val mRate = when {
+            start < 0 -> 0
+            start > 5 -> 5
+            else -> start
         }
 
         for (i in 0..4) {

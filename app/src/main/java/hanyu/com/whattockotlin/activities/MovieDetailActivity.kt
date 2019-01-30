@@ -59,6 +59,6 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     private fun test(){
-        likeView.setLikeNum(12)
+        //likeView.setLikeNum(12)
     }
 }

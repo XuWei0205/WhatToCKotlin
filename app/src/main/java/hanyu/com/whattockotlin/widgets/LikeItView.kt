@@ -139,7 +139,7 @@ class LikeItView(context: Context?, attrs: AttributeSet?) : View(context, attrs)
         //恢复透明度？？？
         bitmapPaint?.alpha = 225
         if (isLike) {
-            canvas.drawBitmap(shiningBitmap, dpToPx(context, 15f).toFloat(), top.toFloat(), bitmapPaint)
+            canvas.drawBitmap(shiningBitmap, dpToPx(context, 50f).toFloat(), top.toFloat(), bitmapPaint)
         } else {
             canvas.save()
             bitmapPaint?.alpha = 0
