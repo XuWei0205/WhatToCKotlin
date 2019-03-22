@@ -29,6 +29,7 @@ open class MoviesBean : DataBean() {
     var testImage: String = ""
         get() = title ?: ""
 
+    var summary: String = ""
 
 
     private fun getCastsBean(dataList: ArrayList<CastsBean>): String {

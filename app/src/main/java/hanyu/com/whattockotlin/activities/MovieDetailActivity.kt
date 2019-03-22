@@ -1,12 +1,16 @@
 package hanyu.com.whattockotlin.activities
 
+import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import hanyu.com.whattockotlin.R
+import hanyu.com.whattockotlin.adapters.RecycleAdapter
+import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
+import hanyu.com.whattockotlin.beans.RatingBean
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.loadImage
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
@@ -21,7 +25,9 @@ import retrofit2.Response
  * Created by HanYu on 2018/8/30.
  */
 @Route(path = Router.MOVIE_DETAIL)
-class MovieDetailActivity : BaseActivity() {
+class MovieDetailActivity : BaseActivity(), RecycleAdapter.IBindData {
+
+
     private lateinit var movieId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +39,6 @@ class MovieDetailActivity : BaseActivity() {
         decorView.systemUiVisibility = option
         window.statusBarColor = Color.TRANSPARENT
         getData(movieId)
-        test()
-
     }
 
     private fun getData(movieId: String) {
@@ -51,11 +55,34 @@ class MovieDetailActivity : BaseActivity() {
     }
 
     private fun requestResponse(response: Response<MoviesBean>) {
-        imgvDetailCover.loadImage(this@MovieDetailActivity, response.body().images?.large!!)
-        toolbarLayout.title = response.body().title
+        response.body().apply {
+            imgvDetailCover.loadImage(this@MovieDetailActivity, this.images?.large!!)
+            toolbarLayout.title = this.title
+            tvSummary.text = this.summary
+            setRating(this.rating)
+        }
+
+
     }
 
-    private fun test(){
-        //likeView.setLikeNum(12)
+
+    private fun setRating(ratingBean: RatingBean?) {
+        ratingBean ?: return
+        val adapter = RecycleAdapter(R.layout.item_movie, this)
+        val list = listOf<Int>(ratingBean.details!!.one,
+                ratingBean.details!!.two,
+                ratingBean.details!!.three,
+                ratingBean.details!!.four,
+                ratingBean.details!!.five)
+        //todo 拓展data类型
+        //adapter.addData(list)
+        rvRating.adapter = adapter
+
+
+
+    }
+
+    override fun onBind(binding: ViewDataBinding, dataBean: DataBean) {
+
     }
 }
