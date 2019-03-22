@@ -11,4 +11,7 @@
     <color name="lineColor">#333333</color>
     <color name="placeHolderBg">#333333</color>
     <color name="likeColor">#ffd500</color>
+    <color name="colorStart">#FF778A</color>
+    <color name="colorEnd">#FF55CB</color>
+    <color name="color_ededed">#ededed</color>
 </resources>

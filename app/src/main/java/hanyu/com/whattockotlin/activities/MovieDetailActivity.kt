@@ -1,7 +1,6 @@
 package hanyu.com.whattockotlin.activities
 
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -29,12 +28,10 @@ class MovieDetailActivity : BaseActivity() {
         movieId = intent.getStringExtra("movieId")
         setContentView(R.layout.activity_movie_detail)
         setSupportActionBar(toolbar)
-        if (Build.VERSION.SDK_INT >= 21) {
-            val decorView = window.decorView
-            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            decorView.systemUiVisibility = option
-            window.statusBarColor = Color.TRANSPARENT
-        }
+        val decorView = window.decorView
+        val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        decorView.systemUiVisibility = option
+        window.statusBarColor = Color.TRANSPARENT
         getData(movieId)
         test()
 
