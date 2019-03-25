@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import android.widget.Toast
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.activities.MovieDetailActivity
-import hanyu.com.whattockotlin.adapters.RecycleAdapter
+import hanyu.com.whattockotlin.adapters.DataBindingAdapter
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
@@ -31,9 +30,9 @@ import retrofit2.Response
 /**
  * Created by HanYu on 2018/8/23.
  */
-open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
+open class LatestFragment2 : BaseFragment(), DataBindingAdapter.IBindData {
 
-    private lateinit var mListAdapter: RecycleAdapter
+    private lateinit var mListAdapter: DataBindingAdapter
     //private lateinit var recyclerView: RecyclerView
 
     override fun getLayoutResource(): Int {
@@ -69,7 +68,7 @@ open class LatestFragment2 : BaseFragment(), RecycleAdapter.IBindData {
 
     fun requestResponse(response: Response<SubjectBean>) {
         val dataList: ArrayList<MoviesBean> = response.body().subjects!!
-        mListAdapter = RecycleAdapter(R.layout.item_movie,  this, BR.item_movie)
+        mListAdapter = DataBindingAdapter(R.layout.item_movie,  this, BR.item_movie)
         mListAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(activity, dataList[position].title, Toast.LENGTH_LONG).show()
             startActivity(Intent(activity, MovieDetailActivity::class.java).putExtra("movieId", dataList[position].id))

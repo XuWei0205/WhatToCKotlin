@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import hanyu.com.whattockotlin.BR
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.adapters.BannerAdapter
-import hanyu.com.whattockotlin.adapters.RecycleAdapter
+import hanyu.com.whattockotlin.adapters.DataBindingAdapter
 import hanyu.com.whattockotlin.beans.DataBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.SubjectBean
@@ -32,12 +32,12 @@ import retrofit2.Response
 /**
  * Created by HanYu on 218/8/23.
  */
-class LatestFragment : BaseFragment(), RecycleAdapter.IBindData, WeakHandler.IWeakCallBack {
+class LatestFragment : BaseFragment(), DataBindingAdapter.IBindData, WeakHandler.IWeakCallBack {
 
     private var weakHandler = WeakHandler(this.javaClass, this)
     private var bannerList = arrayListOf<MoviesBean>()
     private var bannerAdapter = BannerAdapter(bannerList)
-    private var mListAdapter = RecycleAdapter(R.layout.item_movie, this, BR.item_movie)
+    private var mListAdapter = DataBindingAdapter(R.layout.item_movie, this, BR.item_movie)
     private var vp: ViewPager? = null
     private var index = 0
     private var bannerPosition = 1

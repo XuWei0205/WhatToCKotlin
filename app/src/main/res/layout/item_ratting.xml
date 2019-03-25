@@ -8,17 +8,21 @@
 
         <LinearLayout
             android:id="@+id/ll_collection"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
+            android:gravity="end|center_vertical"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:padding="2dp"
             app:layout_constraintStart_toStartOf="parent" />
 
 
         <ProgressBar
+            android:id="@+id/pbRatingPercent"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="0dp"
-            android:layout_height="12dp"
+            android:layout_height="10dp"
             android:progress="20"
+            android:layout_marginStart="5dp"
             android:progressDrawable="@drawable/progress_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

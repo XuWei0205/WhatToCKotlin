@@ -13,7 +13,7 @@ import hanyu.com.whattockotlin.beans.DataBean
 /**
  * Created by HanYu on 2018/8/24.
  */
-class RecycleAdapter(layoutId: Int, private var bindListener: IBindData, private var variableId: Int = 0) : BaseQuickAdapter<DataBean, RecycleAdapter.ItemViewHolder>(layoutId) {
+class DataBindingAdapter(layoutId: Int, private var bindListener: IBindData, private var variableId: Int = 0) : BaseQuickAdapter<DataBean, DataBindingAdapter.ItemViewHolder>(layoutId) {
 
 
     override fun convert(helper: ItemViewHolder, dataBean: DataBean?) {
