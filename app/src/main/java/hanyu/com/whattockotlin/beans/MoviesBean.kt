@@ -1,6 +1,5 @@
 package hanyu.com.whattockotlin.beans
 
-import android.util.Log
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -22,14 +21,8 @@ open class MoviesBean : DataBean() {
     var images: ImageBean? = null
     var art: String = ""
     var id: String = ""
-        set(value) {
-            Log.i("setHere", "-------------$value")
-            field = value
-        }
-    var testImage: String = ""
-        get() = title ?: ""
-
     var summary: String = ""
+    var photos: List<PhotoBean>? = null
 
 
     private fun getCastsBean(dataList: ArrayList<CastsBean>): String {

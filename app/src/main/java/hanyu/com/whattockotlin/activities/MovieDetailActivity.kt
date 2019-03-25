@@ -16,10 +16,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.beans.MoviesBean
+import hanyu.com.whattockotlin.beans.PhotoBean
 import hanyu.com.whattockotlin.beans.RatingBean
 import hanyu.com.whattockotlin.commons.Router
 import hanyu.com.whattockotlin.commons.dpToPx
 import hanyu.com.whattockotlin.commons.loadImage
+import hanyu.com.whattockotlin.commons.loadRoundImage
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
 import hanyu.com.whattockotlin.network.NetworkManager.getIAPI
 import hanyu.com.whattockotlin.network.NetworkManager.request
@@ -70,6 +72,7 @@ class MovieDetailActivity : BaseActivity() {
             tvSummary.text = span
             tvRatting.text = this.rating?.average.toString()
             setRating(this.rating)
+            setPhoto(this.photos!!)
         }
 
 
@@ -124,4 +127,15 @@ class MovieDetailActivity : BaseActivity() {
     class ProgressItem(val progress: Int, val startNum: Int)
 
 
+    class PhotoAdapter(layoutId: Int, data: List<PhotoBean>, private val context: Context) : BaseQuickAdapter<PhotoBean, BaseViewHolder>(layoutId, data) {
+        override fun convert(helper: BaseViewHolder, item: PhotoBean) {
+            helper.getView<ImageView>(R.id.imgvPhoto).loadRoundImage(context, item.image, 5f)
+        }
+
+    }
+
+    private fun setPhoto(data: List<PhotoBean>) {
+        rvReview.adapter = PhotoAdapter(R.layout.item_photo, data, this)
+        rvReview.layoutManager = LinearLayoutManager(this).apply { orientation = LinearLayoutManager.HORIZONTAL }
+    }
 }
