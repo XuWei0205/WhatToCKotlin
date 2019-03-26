@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import hanyu.com.whattockotlin.R
+import hanyu.com.whattockotlin.beans.CommendBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.PhotoBean
 import hanyu.com.whattockotlin.beans.RatingBean
@@ -33,6 +34,7 @@ import retrofit2.Response
 /**
  * Created by HanYu on 2018/8/30.
  */
+//todo 滑动冲突
 @Route(path = Router.MOVIE_DETAIL)
 class MovieDetailActivity : BaseActivity() {
 
@@ -72,7 +74,8 @@ class MovieDetailActivity : BaseActivity() {
             tvSummary.text = span
             tvRatting.text = this.rating?.average.toString()
             setRating(this.rating)
-            setPhoto(this.photos!!)
+            setPhoto(this.photos)
+            setCommend(this.popularReviews)
         }
 
 
@@ -134,8 +137,25 @@ class MovieDetailActivity : BaseActivity() {
 
     }
 
-    private fun setPhoto(data: List<PhotoBean>) {
+    class CommendAdapter(layoutId: Int, data: List<CommendBean>, private val context: Context) : BaseQuickAdapter<CommendBean, BaseViewHolder>(layoutId, data) {
+        override fun convert(helper: BaseViewHolder, item: CommendBean) {
+            item.author ?: return
+            helper.setText(R.id.tvNickName, item.author!!.name)
+            helper.getView<ImageView>(R.id.imgvAvatar).loadRoundImage(context, item.author!!.avatar, 14f)
+            helper.setText(R.id.tvCommend, item.summary)
+        }
+
+    }
+
+    private fun setPhoto(data: List<PhotoBean>?) {
+        data ?: return
         rvReview.adapter = PhotoAdapter(R.layout.item_photo, data, this)
         rvReview.layoutManager = LinearLayoutManager(this).apply { orientation = LinearLayoutManager.HORIZONTAL }
+    }
+
+    private fun setCommend(data: List<CommendBean>?) {
+        data ?: return
+        rvCommend.adapter = CommendAdapter(R.layout.item_commend, data, this)
+        rvCommend.layoutManager = LinearLayoutManager(this)
     }
 }

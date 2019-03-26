@@ -23,6 +23,8 @@ open class MoviesBean : DataBean() {
     var id: String = ""
     var summary: String = ""
     var photos: List<PhotoBean>? = null
+    @SerializedName("popular_reviews")
+    var popularReviews: List<CommendBean>? = null
 
 
     private fun getCastsBean(dataList: ArrayList<CastsBean>): String {

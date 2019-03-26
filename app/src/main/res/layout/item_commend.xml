@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#59333333"
+        android:minHeight="200dp">
+
+        <ImageView
+            android:id="@+id/imgvAvatar"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/imgvAvatar"
+            app:layout_constraintTop_toTopOf="@id/imgvAvatar"
+            tools:text="阿里嘎通" />
+
+        <View
+            android:id="@+id/ratingView"
+            android:layout_width="60dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toEndOf="@id/imgvAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvNickName" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/color_ededed"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/ratingView"
+            app:layout_constraintStart_toEndOf="@id/ratingView"
+            app:layout_constraintTop_toTopOf="@id/ratingView" />
+
+        <TextView
+            android:id="@+id/tvCommend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/imgvAvatar"
+            tools:layout_editor_absoluteX="10dp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
