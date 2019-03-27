@@ -12,17 +12,17 @@ import android.text.style.ForegroundColorSpan
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.github.florent37.glidepalette.BitmapPalette
+import com.github.florent37.glidepalette.GlidePalette
 import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.beans.CommendBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.PhotoBean
 import hanyu.com.whattockotlin.beans.RatingBean
-import hanyu.com.whattockotlin.commons.Router
-import hanyu.com.whattockotlin.commons.dpToPx
-import hanyu.com.whattockotlin.commons.loadImage
-import hanyu.com.whattockotlin.commons.loadRoundImage
+import hanyu.com.whattockotlin.commons.*
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
 import hanyu.com.whattockotlin.network.NetworkManager.getIAPI
 import hanyu.com.whattockotlin.network.NetworkManager.request
@@ -64,7 +64,11 @@ class MovieDetailActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun requestResponse(response: Response<MoviesBean>) {
         response.body().apply {
-            imgvDetailCover.loadImage(this@MovieDetailActivity, this.images?.large!!)
+            //imgvDetailCover.loadImage(this@MovieDetailActivity, this.images?.large!!)
+            testFlorent(this.images?.large!!)
+
+           // testFlorent("http://img1.doubanio.com/view/photo/s_ratio_poster/public/p2549177902.jpg")
+
             toolbarLayout.title = this.title
             tvSummary.text = this.summary
             //缩进处理
@@ -78,6 +82,16 @@ class MovieDetailActivity : BaseActivity() {
             setCommend(this.popularReviews)
         }
 
+
+    }
+
+    private fun testFlorent(url:String){
+        Glide.with(this).load(url)
+                .listener(GlidePalette.with(url)
+                        .use(BitmapPalette.Profile.VIBRANT)
+                        .intoBackground(nsvContent)
+                )
+        .into(imgvDetailCover)
 
     }
 
@@ -132,7 +146,7 @@ class MovieDetailActivity : BaseActivity() {
 
     class PhotoAdapter(layoutId: Int, data: List<PhotoBean>, private val context: Context) : BaseQuickAdapter<PhotoBean, BaseViewHolder>(layoutId, data) {
         override fun convert(helper: BaseViewHolder, item: PhotoBean) {
-            helper.getView<ImageView>(R.id.imgvPhoto).loadRoundImage(context, item.image, 5f)
+            helper.getView<ImageView>(R.id.imgvPhoto).loadRoundImage(context, item.image, 5)
         }
 
     }
@@ -141,7 +155,7 @@ class MovieDetailActivity : BaseActivity() {
         override fun convert(helper: BaseViewHolder, item: CommendBean) {
             item.author ?: return
             helper.setText(R.id.tvNickName, item.author!!.name)
-            helper.getView<ImageView>(R.id.imgvAvatar).loadRoundImage(context, item.author!!.avatar, 14f)
+            helper.getView<ImageView>(R.id.imgvAvatar).loadCircleImage(context, item.author!!.avatar)
             helper.setText(R.id.tvCommend, item.summary)
         }
 

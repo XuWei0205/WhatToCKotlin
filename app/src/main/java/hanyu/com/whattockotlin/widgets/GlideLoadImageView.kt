@@ -42,6 +42,6 @@ class GlideLoadImageView : ImageView {
 
 
     fun setGlideImgv(glideImgv: String) {
-        loadRoundImage(mContext, glideImgv, 5f)
+        loadRoundImage(mContext, glideImgv, 10)
     }
 }
