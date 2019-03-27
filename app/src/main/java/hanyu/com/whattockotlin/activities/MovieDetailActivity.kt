@@ -34,7 +34,6 @@ import retrofit2.Response
 /**
  * Created by HanYu on 2018/8/30.
  */
-//todo 滑动冲突
 @Route(path = Router.MOVIE_DETAIL)
 class MovieDetailActivity : BaseActivity() {
 
@@ -46,6 +45,7 @@ class MovieDetailActivity : BaseActivity() {
         setContentView(R.layout.activity_movie_detail)
         getData(movieId)
         rvRating.layoutManager = LinearLayoutManager(this)
+        rvCommend.isNestedScrollingEnabled = false
     }
 
     private fun getData(movieId: String) {
