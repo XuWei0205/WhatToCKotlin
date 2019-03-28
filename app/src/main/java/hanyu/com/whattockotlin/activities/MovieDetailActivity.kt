@@ -88,8 +88,8 @@ class MovieDetailActivity : BaseActivity() {
     private fun testFlorent(url:String){
         Glide.with(this).load(url)
                 .listener(GlidePalette.with(url)
-                        .use(BitmapPalette.Profile.VIBRANT)
-                        .intoBackground(nsvContent)
+                        .use(BitmapPalette.Profile.VIBRANT_DARK)
+                        .intoBackground(nsvContent, BitmapPalette.Swatch.RGB)
                 )
         .into(imgvDetailCover)
 
