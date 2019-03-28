@@ -30,8 +30,9 @@
             android:layout_marginTop="12dp"
             tools:text="阿里嘎通" />
 
-        <View
-            android:id="@+id/ratingView"
+
+        <hanyu.com.whattockotlin.widgets.RatingBar
+            android:id="@+id/ratingBar"
             android:layout_width="60dp"
             android:layout_height="12dp"
             android:layout_marginStart="5dp"
@@ -46,9 +47,9 @@
             android:layout_marginStart="5dp"
             android:textColor="@color/color_ededed"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/ratingView"
-            app:layout_constraintStart_toEndOf="@id/ratingView"
-            app:layout_constraintTop_toTopOf="@id/ratingView" />
+            app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+            app:layout_constraintStart_toEndOf="@id/ratingBar"
+            app:layout_constraintTop_toTopOf="@id/ratingBar" />
 
         <TextView
             android:id="@+id/tvCommend"

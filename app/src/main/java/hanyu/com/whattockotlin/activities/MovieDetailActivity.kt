@@ -22,10 +22,14 @@ import hanyu.com.whattockotlin.beans.CommendBean
 import hanyu.com.whattockotlin.beans.MoviesBean
 import hanyu.com.whattockotlin.beans.PhotoBean
 import hanyu.com.whattockotlin.beans.RatingBean
-import hanyu.com.whattockotlin.commons.*
+import hanyu.com.whattockotlin.commons.Router
+import hanyu.com.whattockotlin.commons.dpToPx
+import hanyu.com.whattockotlin.commons.loadCircleImage
+import hanyu.com.whattockotlin.commons.loadRoundImage
 import hanyu.com.whattockotlin.network.NetworkManager.getBaseParams
 import hanyu.com.whattockotlin.network.NetworkManager.getIAPI
 import hanyu.com.whattockotlin.network.NetworkManager.request
+import hanyu.com.whattockotlin.widgets.RatingBar
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -157,6 +161,7 @@ class MovieDetailActivity : BaseActivity() {
             helper.setText(R.id.tvNickName, item.author!!.name)
             helper.getView<ImageView>(R.id.imgvAvatar).loadCircleImage(context, item.author!!.avatar)
             helper.setText(R.id.tvCommend, item.summary)
+            helper.getView<RatingBar>(R.id.ratingBar).setStart(item.rating!!.value)
         }
 
     }

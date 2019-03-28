@@ -11,6 +11,7 @@ class RatingBean {
     var stars: Float = 0.0f
     var min: Float = 0.0f
     var details: RatingDetailBean? = null
+    var value: Int = 0
 }
 
 class RatingDetailBean {

@@ -59,7 +59,7 @@ class RatingBar : LinearLayout {
     }
 
 
-    private fun setStart(start: Int) {
+     fun setStart(start: Int) {
         val mRate = when {
             start < 0 -> 0
             start > 5 -> 5
