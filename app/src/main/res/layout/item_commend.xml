@@ -7,12 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#33FFFFFF"
-        android:minHeight="200dp">
+        android:minHeight="150dp">
 
         <ImageView
             android:id="@+id/imgvAvatar"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="14dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,13 +26,14 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/imgvAvatar"
-            app:layout_constraintTop_toTopOf="@id/imgvAvatar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
             tools:text="阿里嘎通" />
 
         <View
             android:id="@+id/ratingView"
             android:layout_width="60dp"
-            android:layout_height="15dp"
+            android:layout_height="12dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
             app:layout_constraintStart_toEndOf="@id/imgvAvatar"
