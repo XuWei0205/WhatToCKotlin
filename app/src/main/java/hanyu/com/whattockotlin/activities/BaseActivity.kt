@@ -1,17 +1,15 @@
 package hanyu.com.whattockotlin.activities
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.gyf.barlibrary.ImmersionBar
-import hanyu.com.whattockotlin.R
 import hanyu.com.whattockotlin.fragments.BaseFragment
 import me.jessyan.autosize.AutoSize
 
 /**
  * Created by HanYu on 2018/8/22.
  */
-open class BaseActivity : AppCompatActivity(){
+abstract class BaseActivity : AppCompatActivity() {
 
     fun addFragment(containerResourceId: Int, fc: Class<out BaseFragment>, tag: String): BaseFragment? {
         val fragmentManager = supportFragmentManager
@@ -37,8 +35,11 @@ open class BaseActivity : AppCompatActivity(){
 
     }
 
+    abstract fun getLayoutId(): Int
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(getLayoutId())
         fixStatusBar()
     }
 
@@ -47,7 +48,8 @@ open class BaseActivity : AppCompatActivity(){
         super.onResume()
         AutoSize.autoConvertDensityOfGlobal(this)
     }
-    private fun fixStatusBar() {
+
+    open fun fixStatusBar() {
         ImmersionBar.with(this)
                 .init()
     }

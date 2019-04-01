@@ -40,16 +40,19 @@ import retrofit2.Response
  */
 @Route(path = Router.MOVIE_DETAIL)
 class MovieDetailActivity : BaseActivity() {
-
+    override fun getLayoutId()= R.layout.activity_movie_detail
 
     private lateinit var movieId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movieId = intent.getStringExtra("movieId")
-        setContentView(R.layout.activity_movie_detail)
         getData(movieId)
         rvRating.layoutManager = LinearLayoutManager(this)
         rvCommend.isNestedScrollingEnabled = false
+    }
+
+    override fun fixStatusBar(){
+
     }
 
     private fun getData(movieId: String) {

@@ -11,13 +11,14 @@ import hanyu.com.whattockotlin.network.ConnectUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+    override fun getLayoutId() = R.layout.activity_main
+
     private var currentFragment: BaseFragment? = null
     private var fragments = arrayOfNulls<BaseFragment>(3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         toast(this, ConnectUtil.isConnecting(this).toString())
-        setContentView(R.layout.activity_main)
         initView()
         jumpToFragment(1)
     }
